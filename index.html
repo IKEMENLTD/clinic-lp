@@ -51,6 +51,32 @@ img{max-width:100%;display:block;}
 .en{font-family:'Cormorant Garamond',serif;letter-spacing:.16em;}
 body.locked{overflow:hidden;height:100vh;}
 
+/* ---------- drug accordions ---------- */
+.drug-acc{max-width:640px;margin:0 auto 10px;border-radius:12px;overflow:hidden;border:1px solid var(--hair);background:var(--card);}
+.drug-acc summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+  padding:13px 16px;background:linear-gradient(120deg,var(--gold-deep),var(--gold));
+  color:#fff;font-size:13.5px;font-weight:800;letter-spacing:.04em;
+}
+.drug-acc summary::-webkit-details-marker{display:none;}
+.drug-acc summary svg{width:24px;height:24px;flex:none;background:#fff;color:var(--gold-deep);border-radius:50%;padding:5px;}
+.drug-acc summary .chev{margin-left:auto;font-size:11px;transition:transform .2s;}
+.drug-acc[open] summary .chev{transform:rotate(180deg);}
+.drug-acc .acc-body{padding:12px;}
+.drug-acc .acc-note{font-size:11px;color:var(--muted);margin:2px 2px 10px;}
+
+/* ---------- emotion band ---------- */
+.emotion-band{
+  background:linear-gradient(180deg,#BFD9F2,#DCEBFA 55%,#F3F8FD);
+  text-align:center;padding:72px 24px;
+}
+.emotion-band h2{
+  font-family:'Shippori Mincho',serif;font-weight:600;
+  font-size:clamp(19px,5.4vw,26px);letter-spacing:.08em;line-height:2.2;color:var(--ink);
+}
+.emotion-band h2 b{color:var(--gold-deep);}
+.emotion-band p{font-size:12.5px;color:var(--ink-soft);margin-top:18px;line-height:2.1;max-width:34em;margin-left:auto;margin-right:auto;}
+
 /* ---------- image placeholder frames ---------- */
 .ph-frame{
   border:2px dashed #A9BBD4;
@@ -855,6 +881,21 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
       <p class="oc-note">※定期プラン適用時。詳しくはタップ →</p>
     </div>
   </div>
+  <div class="plan-lead" style="background:linear-gradient(120deg,#8B6FA8,#A98FC4);">まずは低用量から試したい方に</div>
+  <div class="matrix-wrap" style="margin-bottom:34px;">
+    <div class="plan-catch">＼ 定期の縛りなし・1ヶ月分だけ ／</div>
+    <div class="offer-card" style="margin:0 auto;cursor:pointer;" onclick="location.hash='product-manjaro-25'">
+      <div class="oc-head" style="background:linear-gradient(120deg,#8B6FA8,#A98FC4);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8B6FA8;"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+        <span>マンジャロ 2.5mg 単品<small>1ヶ月分（2箱4本）・お試しに</small></span>
+      </div>
+      <div class="oc-body">
+        <span class="oc-label">1ヶ月<br>あたり</span>
+        <span class="oc-price" style="color:#8B6FA8;">13,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+      </div>
+      <p class="oc-note">※単品購入。合わなければ1ヶ月でやめられます。詳しくはタップ →</p>
+    </div>
+  </div>
   <div class="plan-lead blue">目的から選びたい方はこちら</div>
   <div class="cat-grid">
     <div class="cat-card" data-group="p_himan">
@@ -977,6 +1018,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
       </table>
     </div>
     <p class="matrix-note">※価格はすべて税込です。※定期プランは3ヶ月・6ヶ月更新（1ヶ月あたりの価格は同一）。いつでも解約・休止できます。※2.5mgから開始し、医師の診察のうえ段階的に増量します。※別途送料がかかる場合があります。</p>
+    <div id="accList" style="margin-top:20px;"></div>
     <a href="#teiki" class="sub-banner" style="max-width:640px;margin:18px auto 0;">
       <span class="sub-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg></span>
       <span class="sub-banner-text">
@@ -994,6 +1036,10 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <span class="en-label en">ONLINE</span>
     <h2>いつでも、好きな時に<br>スマホひとつで</h2>
     <div class="rule"></div>
+  </div>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:640px;margin:0 auto 22px;">
+    <span class="ph-id">P-27 受付フォトバンド<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">ベッドの上でリラックスしながらスマートフォンを眺める20〜30代の日本人女性。柔らかい自然光、白とグレージュの寝具、穏やかな表情。左側に縦書きコピー「いつでも、好きな時に オンラインで予約ができます」と丸バッジ「24時間受付」を重ねる余白を残す。</p>
   </div>
   <div class="check-grid">
     <div class="check-card">
@@ -1064,6 +1110,21 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   </div>
 </section>
 
+<!-- ONLINE RESERVATION EXPLAINER -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="glp-hero" style="margin:0;"><span class="tag" style="border-color:var(--accent);color:var(--accent-deep);">24時間受付中</span></span>
+    <h2 style="margin-top:10px;"><span class="accent">オンライン予約</span></h2>
+    <div class="rule"></div>
+  </div>
+  <p style="max-width:34em;margin:0 auto 22px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:2.1;">初診の方でも、<b style="color:var(--accent-deep);">オンラインで診察し、お薬をご自宅までお届け</b>いたします。いつでもおうちで、好きな時に、気軽にご予約いただけます。</p>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:560px;margin:0 auto 22px;">
+    <span class="ph-id">P-28 予約イラスト<span class="ph-size">800×600px</span></span>
+    <p class="ph-prompt">フラットなラインイラスト。大きなスマートフォンの画面から白衣の女性スタッフが笑顔で手を振り、周囲に問診票・カプセル薬・配送ボックスのアイコンが吹き出しで浮かぶ。淡いピンクとブルーグレーの2色使い、余白広め、医療系LPらしい優しいタッチ。</p>
+  </div>
+  <p style="text-align:center;font-family:'Shippori Mincho',serif;font-size:13.5px;color:var(--ink);letter-spacing:.06em;line-height:2.1;">Re:Design Clinicは現在、おかげさまで<br>大変ご好評をいただいております。</p>
+</section>
+
 <!-- ATTENTION -->
 <section class="section" style="padding-top:0;">
   <div class="attention-box">
@@ -1077,6 +1138,30 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
       <span>友だち追加して相談する<small>登録は10秒・相談は無料</small></span>
     </a>
   </div>
+</section>
+
+<!-- OFFER REPEAT -->
+<section class="section" style="background:var(--accent-soft);">
+  <div style="text-align:center;"><div class="goal-badge">3ヶ月で 約<b>−6kg</b>を目指す<sup>※1</sup></div></div>
+  <div class="offer-card" style="margin:0 auto 20px;">
+    <div class="oc-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+      <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+    </div>
+    <div class="oc-body">
+      <span class="oc-label">1ヶ月<br>あたり</span>
+      <span class="oc-price">12,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+    </div>
+    <p class="oc-note">※マンジャロ2.5mg 定期プランの月あたり金額。単品購入は13,980円〜。別途送料がかかる場合があります。</p>
+  </div>
+  <div style="max-width:440px;margin:0 auto;">
+    <p class="cta-microcopy">＼ 相談無料・LINEで24時間受付 ／</p>
+    <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">
+      <span class="ico">LINE</span>
+      <span>公式LINEで無料相談する<small>友だち追加はこちら／診察のご予約もLINEから</small></span>
+    </a>
+  </div>
+  <p class="footnotes" style="margin:14px auto 0;">※1 参考文献：Jastreboff AM, et al. "Tirzepatide Once Weekly for the Treatment of Obesity." N Engl J Med 2022;387 における同成分製剤の臨床試験結果をもとにした目安です。効果には個人差があり、結果を保証するものではありません。※自由診療（保険適用外）です。</p>
 </section>
 
 <!-- PROBLEM -->
@@ -1187,8 +1272,48 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   </div>
 </section>
 
-<!-- LIFE CHANGE -->
+<!-- DAILY LIFE BAND -->
 <section class="section" style="padding-top:0;">
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:640px;margin:0 auto;">
+    <span class="ph-id">P-29 いつもの生活フォト<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">明るいカフェで友人と楽しそうに談笑する20〜30代の日本人女性2人。自然光、柔らかいボケ、幸福感のあるライフスタイル写真。右側に縦書きコピー「あとは、いつもの生活を送るだけ」を重ねる余白を残す。</p>
+  </div>
+</section>
+
+<!-- CONSULT CLOSING -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="en-label en">SUPPORT</span>
+    <h2>迷っている方も<br>お気軽にご相談ください</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:560px;margin:0 auto 22px;">
+    <span class="ph-id">P-30 相談クロージング写真<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">明るい診察室の窓辺で、イヤホンをつけてノートPCの画面に微笑みかける白衣の日本人女性医師（30代）。清潔感と親しみやすさ、柔らかい自然光。左上に見出し「迷っている方もお気軽にご相談ください」を重ねる余白を残す。</p>
+  </div>
+  <div class="promise-box">
+    <div class="pr-head">Re:Design Clinic のお約束</div>
+    <ul>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>医学的に必要がないと医師が判断した方には、<b>お薬の処方はいたしません。</b></span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>体調・既往歴を確認のうえ、<b>一人ひとりに寄り添った処方</b>を心がけています。</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- EMOTION BAND -->
+<section class="emotion-band">
+  <h2>変わりたいと思った、あなたへ。<br>もう<b>一人で悩まなくて大丈夫</b>です。</h2>
+  <p>何度も挑戦しては続かなかったダイエットも、体型だけでなく健康が気になり始めた今も。医師と一緒なら、あなたに合った変わり方がきっと見つかります。</p>
+</section>
+
+<!-- LIFE CHANGE -->
+<section class="section" style="padding-top:60px;">
   <div class="section-head">
     <span class="en-label en">FUTURE</span>
     <h2>日常が変わる<br>自分がだんだん好きになる</h2>
@@ -1234,6 +1359,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <details><summary>家族に知られたくないのですが…</summary><div class="a">お薬は中身がわからない梱包でお届けします。配送方法のご相談もLINEで承ります。</div></details>
     <details><summary>副作用が出たらどうすればいいですか？</summary><div class="a">まずは使用を中止し、公式LINEまたは医療機関にご相談ください。症状が重い場合は速やかに受診してください。</div></details>
     <details><summary>支払い方法を教えてください。</summary><div class="a">定期プランは初回お申し込み時に一括でのお支払いとなります（3ヶ月分・6ヶ月分をまとめてご請求）。詳細はLINEにてご案内します。</div></details>
+    <details><summary>保険は使えますか？</summary><div class="a">本ページに記載の治療はすべて自由診療のため、保険適用外です。価格はすべて税込で表示しています。</div></details>
   </div>
 </section>
 
@@ -1519,6 +1645,19 @@ const catIcons = {
 const allItems = {};
 Object.values(groups).forEach(g => g.items.forEach(it => allItems[it.id] = {...it, cat:g.label}));
 const allManjaroIds = groups.p_himan.items.map(it => it.id);
+
+// 価格一覧下のアコーディオン（マンジャロ以外のカテゴリ）
+const accList = document.getElementById('accList');
+if(accList){
+  const accLabels = {p_pill:'ピル（低用量/アフター）', p_biyou:'美容内服', p_exo:'エクソソーム', p_ed:'ED治療薬', p_aga:'AGA治療薬'};
+  accList.innerHTML = ['p_pill','p_biyou','p_exo','p_ed','p_aga'].map(k=>{
+    const g = groups[k];
+    return `<details class="drug-acc">
+      <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${catIcons[k]}</svg>${accLabels[k]}<span class="chev">▼</span></summary>
+      <div class="acc-body"><p class="acc-note">${g.note}</p><div class="drug" style="margin-bottom:0;"><table class="price">${buildRowsHtml(g)}</table></div></div>
+    </details>`;
+  }).join('');
+}
 
 // category grid -> navigate to its own page (#cat-xxxx)
 document.querySelectorAll('.cat-card').forEach(c=>{
