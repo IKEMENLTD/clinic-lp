@@ -50,6 +50,15 @@ img{max-width:100%;display:block;}
 .serif{font-family:'Shippori Mincho',serif;}
 .en{font-family:'Cormorant Garamond',serif;letter-spacing:.16em;}
 body.locked{overflow:hidden;height:100vh;}
+h1,h2,h3,.serif,.goal-badge,.plan-lead,.problem-title,.mech-catch,.emotion-band h2{font-feature-settings:"palt" 1;}
+
+/* ---------- curved section transitions ---------- */
+section.curved{position:relative;padding-top:100px;}
+.curve-top{position:absolute;top:-1px;left:0;width:100%;height:44px;display:block;pointer-events:none;}
+
+/* ---------- scroll reveal (JS-guarded; no-JS and reduced-motion stay visible) ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:none;}
 
 /* ---------- drug accordions ---------- */
 .drug-acc{max-width:640px;margin:0 auto 10px;border-radius:12px;overflow:hidden;border:1px solid var(--hair);background:var(--card);}
@@ -126,7 +135,7 @@ body.locked{overflow:hidden;height:100vh;}
 
 /* ---------- hero ---------- */
 .hero{
-  position:relative;
+  position:relative;z-index:0;
   background:
     radial-gradient(120% 80% at 85% 0%, rgba(217,108,147,.14), transparent 55%),
     radial-gradient(100% 80% at 0% 100%, rgba(108,147,201,.14), transparent 55%),
@@ -134,6 +143,27 @@ body.locked{overflow:hidden;height:100vh;}
   padding:34px 22px 46px;
   overflow:hidden;
 }
+.hero::before{
+  content:"";position:absolute;z-index:-1;top:-70px;right:-70px;
+  width:240px;height:240px;border-radius:50%;
+  border:1.5px dashed rgba(185,74,110,.28);
+}
+.hero::after{
+  content:"";position:absolute;z-index:-1;bottom:20px;left:-30px;
+  width:210px;height:210px;opacity:.45;
+  background:radial-gradient(circle, rgba(108,147,201,.5) 1.5px, transparent 1.6px) 0 0/16px 16px;
+}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.hero>*{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both;}
+.hero>*:nth-child(2){animation-delay:.06s;}
+.hero>*:nth-child(3){animation-delay:.12s;}
+.hero>*:nth-child(4){animation-delay:.18s;}
+.hero>*:nth-child(5){animation-delay:.24s;}
+.hero>*:nth-child(6){animation-delay:.3s;}
+.hero>*:nth-child(7){animation-delay:.36s;}
+.hero>*:nth-child(8){animation-delay:.42s;}
+.hero>*:nth-child(9){animation-delay:.48s;}
+.hero>*:nth-child(10){animation-delay:.54s;}
 .hero-logo{height:40px;width:auto;margin-bottom:18px;}
 .hero-badges{display:flex;gap:10px;margin-bottom:18px;}
 .hero-badge{
@@ -173,17 +203,34 @@ body.locked{overflow:hidden;height:100vh;}
 
 /* offer card */
 .offer-card{
-  max-width:560px;
-  background:var(--card);border-radius:18px;overflow:hidden;
-  box-shadow:0 16px 38px rgba(74,102,144,.16);
-  border:1px solid var(--hair);
+  max-width:560px;position:relative;
+  border-radius:18px;overflow:hidden;
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card),var(--card)) padding-box,
+    linear-gradient(120deg,var(--accent),var(--gold)) border-box;
+  box-shadow:
+    0 1px 3px rgba(185,74,110,.10),
+    0 24px 48px -20px rgba(185,74,110,.38);
   margin-bottom:20px;
 }
 .offer-card .oc-head{
+  position:relative;overflow:hidden;
   display:flex;align-items:center;gap:12px;
   background:linear-gradient(120deg,var(--accent-deep),var(--accent));
   color:#fff;padding:13px 18px;
   font-size:15.5px;font-weight:800;letter-spacing:.04em;
+}
+.offer-card .oc-head::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 40%, rgba(255,255,255,.25) 50%, transparent 60%);
+  animation:subShine 3.2s ease-in-out infinite;
+}
+.oc-flag{
+  margin-left:auto;flex:none;
+  font-size:9.5px;font-weight:700;letter-spacing:.04em;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.55);
+  padding:3px 10px;border-radius:999px;
 }
 .offer-card .oc-head svg{width:30px;height:30px;flex:none;background:#fff;color:var(--accent-deep);border-radius:50%;padding:6px;}
 .offer-card .oc-head small{display:block;font-size:10px;font-weight:500;opacity:.9;}
@@ -199,13 +246,24 @@ body.locked{overflow:hidden;height:100vh;}
 .footnotes{font-size:9.5px;color:var(--muted);line-height:1.7;margin-top:14px;max-width:560px;}
 
 .btn-line{
+  position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;gap:10px;
   background:linear-gradient(180deg,var(--line),var(--line-deep));
   color:#fff;text-decoration:none;font-weight:700;
   font-size:16px;letter-spacing:.04em;
-  padding:17px 26px;border-radius:999px;
-  box-shadow:0 10px 24px rgba(6,199,85,.28);
+  padding:17px 40px 17px 26px;border-radius:999px;
+  box-shadow:0 2px 5px rgba(5,166,72,.25), 0 14px 28px -8px rgba(6,199,85,.45);
   max-width:440px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn-line::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+  animation:subShine 3s ease-in-out infinite;
+}
+.btn-line::after{
+  content:"›";position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:19px;font-weight:700;opacity:.9;
 }
 .btn-line .ico{
   width:26px;height:26px;flex:none;border-radius:6px;background:#fff;
@@ -266,7 +324,13 @@ body.locked{overflow:hidden;height:100vh;}
 /* ---------- sections ---------- */
 .section{padding:60px 20px;}
 .section-head{text-align:center;margin-bottom:34px;}
-.section-head .en-label{color:var(--gold-deep);font-size:11px;display:block;margin-bottom:10px;}
+.section-head .en-label{
+  color:var(--gold-deep);font-size:11px;font-style:italic;
+  display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;
+}
+.section-head .en-label::before,.section-head .en-label::after{
+  content:"";width:26px;height:1px;background:var(--gold);opacity:.55;
+}
 .section-head h2{
   font-family:'Shippori Mincho',serif;font-weight:600;
   font-size:clamp(20px,5.4vw,28px);letter-spacing:.08em;color:var(--ink);
@@ -342,12 +406,17 @@ table.matrix .plain{font-size:13.5px;font-weight:600;}
 .stat-card:nth-child(2){background:linear-gradient(160deg,var(--accent),var(--accent-deep));}
 .stat-card:nth-child(3){background:linear-gradient(160deg,var(--gold),var(--gold-deep));}
 .stat-card .ring{
-  width:74px;height:74px;border-radius:50%;border:4px solid rgba(255,255,255,.55);
+  width:78px;height:78px;border-radius:50%;position:relative;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  margin:0 auto 10px;background:rgba(255,255,255,.12);
+  margin:0 auto 10px;
+  background:conic-gradient(rgba(255,255,255,.95) 0 76%, rgba(255,255,255,.25) 0);
 }
-.stat-card .ring b{font-size:15px;line-height:1.2;}
-.stat-card .ring small{font-size:8.5px;opacity:.9;}
+.stat-card .ring::before{content:"";position:absolute;inset:5px;border-radius:50%;}
+.stat-card:nth-child(1) .ring::before{background:#59A99C;}
+.stat-card:nth-child(2) .ring::before{background:#C75E82;}
+.stat-card:nth-child(3) .ring::before{background:#5D80B1;}
+.stat-card .ring b{font-size:15px;line-height:1.2;position:relative;z-index:1;}
+.stat-card .ring small{font-size:8.5px;opacity:.9;position:relative;z-index:1;}
 .stat-card p{font-size:10.5px;font-weight:700;letter-spacing:.04em;line-height:1.5;}
 
 /* ---------- attention ---------- */
@@ -365,7 +434,10 @@ table.matrix .plain{font-size:13.5px;font-weight:600;}
 
 /* ---------- problem (dark) ---------- */
 .problem-section{
-  background:linear-gradient(180deg,#3E4A5C,#55657D);
+  background:
+    radial-gradient(90% 50% at 15% 10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(80% 45% at 90% 85%, rgba(108,147,201,.14), transparent 60%),
+    linear-gradient(180deg,#3E4A5C,#55657D);
   padding:64px 20px;color:#E8EDF5;
 }
 .problem-title{
@@ -381,6 +453,8 @@ table.matrix .plain{font-size:13.5px;font-weight:600;}
   display:flex;align-items:center;gap:14px;
   background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
   border-radius:14px;padding:16px 18px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  box-shadow:0 10px 24px -12px rgba(20,26,36,.5);
 }
 .bubble:nth-child(even){flex-direction:row-reverse;text-align:right;}
 .bubble svg{width:34px;height:34px;flex:none;color:#AFC3E0;}
@@ -437,7 +511,15 @@ table.matrix .plain{font-size:13.5px;font-weight:600;}
   display:grid;place-items:center;flex:none;
 }
 .glp-box li .ck svg{width:13px;height:13px;}
-.compare-grid{max-width:560px;margin:0 auto 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.compare-grid{max-width:560px;margin:0 auto 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;}
+.compare-grid::after{
+  content:"VS";position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:#fff;border:1px solid var(--hair);
+  display:grid;place-items:center;
+  font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--ink);
+  box-shadow:0 5px 12px rgba(51,59,71,.14);
+}
 .compare-card{border-radius:14px;padding:18px 12px;text-align:center;}
 .compare-card.bad{background:#E9EEF6;border:1px solid var(--hair);}
 .compare-card.good{background:var(--accent-soft);border:1px solid var(--accent);}
@@ -775,6 +857,21 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 }
 .step p{font-size:12px;color:var(--muted);}
 
+/* ---------- hover states (pointer devices) ---------- */
+@media (hover:hover){
+  .btn-line:hover{transform:translateY(-2px);box-shadow:0 3px 6px rgba(5,166,72,.28), 0 20px 36px -8px rgba(6,199,85,.5);}
+  .cat-card:hover{transform:translateY(-3px);box-shadow:0 16px 32px -12px rgba(74,102,144,.28);}
+  .check-card:hover,.life-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -12px rgba(74,102,144,.24);}
+  .check-card,.life-card,.cat-card{transition:transform .2s ease, box-shadow .2s ease;}
+  .drug-acc summary:hover{filter:brightness(1.06);}
+  .sub-banner:hover{filter:brightness(1.05);}
+}
+.th-badge{
+  display:block;width:max-content;margin:3px auto 0;
+  font-size:8.5px;font-weight:700;letter-spacing:.04em;
+  color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;
+}
+
 @media (min-width:720px){
   body{font-size:16px;}
   .features{grid-template-columns:1fr 1fr;max-width:760px;}
@@ -823,6 +920,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <div class="oc-head">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
       <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+      <span class="oc-flag">解約いつでもOK</span>
     </div>
     <div class="oc-body">
       <span class="oc-label">1ヶ月<br>あたり</span>
@@ -968,7 +1066,8 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </section>
 
 <!-- DOSE MATRIX -->
-<section class="section price-section">
+<section class="section price-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FAFCFF"/></svg>
   <div class="section-head">
     <span class="en-label en">PRICE</span>
     <h2>マンジャロ<br><span class="accent">お薬の価格一覧</span></h2>
@@ -981,7 +1080,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
         GIP/GLP-1注射薬（マンジャロ）
       </div>
       <table class="matrix">
-        <tr><th style="width:64px;background:var(--card);"></th><th>2.5mg</th><th>5mg</th></tr>
+        <tr><th style="width:64px;background:var(--card);"></th><th>2.5mg<span class="th-badge">開始用量</span></th><th>5mg</th></tr>
         <tr>
           <td class="rowlab">定期<br>プラン</td>
           <td class="big">12,980円<small>1ヶ月あたり</small></td>
@@ -1031,7 +1130,8 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </section>
 
 <!-- CONVENIENCE -->
-<section class="section">
+<section class="section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#EEF4FD"/></svg>
   <div class="section-head">
     <span class="en-label en">ONLINE</span>
     <h2>いつでも、好きな時に<br>スマホひとつで</h2>
@@ -1147,6 +1247,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <div class="oc-head">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
       <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+      <span class="oc-flag">解約いつでもOK</span>
     </div>
     <div class="oc-body">
       <span class="oc-label">1ヶ月<br>あたり</span>
@@ -1165,7 +1266,8 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </section>
 
 <!-- PROBLEM -->
-<section class="problem-section">
+<section class="problem-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FBE9F0"/></svg>
   <h2 class="problem-title">頑張っても続かなかった、<br>そのダイエットには<br><mark>理由があります</mark></h2>
   <div class="bubble-grid">
     <div class="bubble">
@@ -1189,7 +1291,8 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </section>
 
 <!-- MECHANISM -->
-<section class="mech-section">
+<section class="mech-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#55657D"/></svg>
   <h2 class="mech-catch">根拠のある医療の力で<br><mark>続けられるダイエット</mark>を</h2>
   <div class="glp-hero">
     <span class="tag">元々人が持つホルモン</span>
@@ -1307,7 +1410,8 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </section>
 
 <!-- EMOTION BAND -->
-<section class="emotion-band">
+<section class="emotion-band curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FAFCFF"/></svg>
   <h2>変わりたいと思った、あなたへ。<br>もう<b>一人で悩まなくて大丈夫</b>です。</h2>
   <p>何度も挑戦しては続かなかったダイエットも、体型だけでなく健康が気になり始めた今も。医師と一緒なら、あなたに合った変わり方がきっと見つかります。</p>
 </section>
@@ -1789,6 +1893,18 @@ syncFromHash();
 const heroEl = document.querySelector('.hero');
 const sticky = document.getElementById('stickyCta');
 new IntersectionObserver(e=>{ sticky.classList.toggle('show', !e[0].isIntersecting); }, {threshold:0}).observe(heroEl);
+
+// scroll reveal (reduced-motion環境では付与しない)
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const ro = new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('in'); ro.unobserve(en.target); }
+  }), {threshold:.1, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.section > *, .cat-section > *, .problem-section > *, .mech-section > *, .emotion-band > *, .notice-section > *, .cta-band > *').forEach(el=>{
+    if(el.classList.contains('curve-top')) return;
+    el.classList.add('reveal');
+    ro.observe(el);
+  });
+}
 </script>
 </body>
 </html>
