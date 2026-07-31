@@ -12,7 +12,6 @@
 <meta property="og:description" content="GIP/GLP-1注射薬による医療ダイエットをオンラインで。医師の診察のもと、お薬をご自宅までお届けします。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
@@ -51,6 +50,29 @@ img{max-width:100%;display:block;}
 .serif{font-family:'Shippori Mincho',serif;}
 .en{font-family:'Cormorant Garamond',serif;letter-spacing:.16em;}
 body.locked{overflow:hidden;height:100vh;}
+
+/* ---------- image placeholder frames ---------- */
+.ph-frame{
+  border:2px dashed #A9BBD4;
+  background:repeating-linear-gradient(45deg,#F4F8FE,#F4F8FE 12px,#EDF3FC 12px,#EDF3FC 24px);
+  border-radius:12px;display:flex;flex-direction:column;justify-content:center;
+  padding:14px;gap:6px;color:var(--ink-soft);overflow:hidden;
+}
+.ph-frame .ph-id{
+  font-size:10.5px;font-weight:800;color:var(--gold-deep);letter-spacing:.08em;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+.ph-frame .ph-id::before{
+  content:"IMG";background:var(--gold-deep);color:#fff;font-size:8.5px;
+  padding:1px 7px;border-radius:4px;letter-spacing:.1em;
+}
+.ph-frame .ph-size{font-size:8.5px;font-weight:500;color:var(--muted);letter-spacing:.02em;}
+.ph-frame .ph-prompt{font-size:9.5px;line-height:1.7;color:var(--ink-soft);user-select:all;}
+.ph-thumb{
+  width:46px;height:46px;border-radius:8px;flex:none;padding:0;
+  display:grid;place-items:center;border-width:1.5px;gap:0;
+}
+.ph-thumb span{font-size:8px;font-weight:800;color:var(--gold-deep);letter-spacing:.02em;}
 
 /* ---------- compliance bar ---------- */
 .compliance-bar{
@@ -750,13 +772,16 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 <div class="compliance-bar">※医師の診察の結果、お薬を処方できない場合があります。すべて自由診療です。</div>
 
 <header class="header">
-  <div class="logo"><img src="assets/img/logo.png" alt="Re:Design Clinic"><span class="en">Re:Design Clinic</span></div>
+  <div class="logo"><span class="ph-frame ph-thumb" style="width:58px;height:22px;border-radius:6px;"><span>P-01</span></span><span class="en">Re:Design Clinic</span></div>
   <a class="mini-cta" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">LINEで相談</a>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <img class="hero-logo" src="assets/img/logo.png" alt="Re:Design Clinic">
+  <div class="ph-frame" style="max-width:360px;margin-bottom:18px;">
+    <span class="ph-id">P-01 ロゴ<span class="ph-size">900×561px（透過PNG）</span></span>
+    <p class="ph-prompt">美容クリニック「Re:Design Clinic」のロゴ。細線の欧文カリグラフィで“R”と“D”を組み合わせた上品なモノグラム、その下に小さく“Re:Design Clinic”のロゴタイプ。くすみブルーグレー単色、フラットなベクター調、余白広め、背景透過。</p>
+  </div>
   <div class="hero-badges">
     <span class="hero-badge">スマホで<br>完結<small>オンライン診療</small></span>
     <span class="hero-badge">週<b>1</b>回<br>の投与<small>※2</small></span>
@@ -789,7 +814,10 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 
 <!-- DOCTOR BANNER -->
 <div class="doctor-banner">
-  <img src="" id="doctorBannerImg" alt="医師による診察、スマホ1つで完結。いつでも、どこでも、医師の診察を。">
+  <div class="ph-frame" style="aspect-ratio:1000/562;">
+    <span class="ph-id">P-02 医師バナー<span class="ph-size">1000×562px</span></span>
+    <p class="ph-prompt">オンライン診療の横長バナー写真。清潔感のある白衣の日本人男性医師（30代）が微笑みながらスマートフォンをこちらに向け、画面にはビデオ診察の様子。背景は明るいベージュから淡い金色へのグラデーション。左側に日本語コピー「医師による診察、スマホ1つで完結。」を大きく配置し、下部に帯で「いつでも、どこでも、医師の診察を。」。高級感のある医療広告バナー、柔らかいスタジオ光。</p>
+  </div>
 </div>
 
 <!-- SUB BANNER -->
@@ -828,42 +856,66 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   </div>
   <div class="plan-lead blue">目的から選びたい方はこちら</div>
   <div class="cat-grid">
-    <div class="cat-card has-photo" data-group="p_himan" data-photo="himan">
+    <div class="cat-card" data-group="p_himan">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-03<span class="ph-size">480×366px</span></span>
+        <p class="ph-prompt">明るい窓辺で体重計に乗り、うれしそうに目盛りを見る20〜30代の日本人女性。白×ベージュ基調、自然光、清潔なライフスタイル写真。カード背景用に被写体は中央〜上寄り、下1/3に文字を重ねる余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
       <h3>肥満症治療<br>(医療ダイエット)</h3>
       <span class="cat-price">月々12,980円〜</span>
       <p>医療の力によるダイエット</p>
       <span class="go">詳しく見る →</span>
     </div>
-    <div class="cat-card has-photo" data-group="p_ed" data-photo="ed">
+    <div class="cat-card" data-group="p_ed">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-04<span class="ph-size">480×366px</span></span>
+        <p class="ph-prompt">爽やかな30代の日本人男性のポートレート。自信のある柔らかな表情、ネイビーシャツ、明るいボケ背景。男性向け医療LPのカード背景用、下1/3に文字余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.4-9.5-9C.7 8 2 4.5 5.5 4c2-.3 3.7.8 4.5 2 .8-1.2 2.5-2.3 4.5-2 3.5.5 4.8 4 3 8-2.5 4.6-9.5 9-9.5 9z"/></svg>
       <h3>ED/早漏</h3>
       <span class="cat-price">1錠1,500円〜</span>
       <p>男性の自信を取り戻す</p>
       <span class="go">詳しく見る →</span>
     </div>
-    <div class="cat-card has-photo" data-group="p_biyou" data-photo="biyou">
+    <div class="cat-card" data-group="p_biyou">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-05<span class="ph-size">480×366px</span></span>
+        <p class="ph-prompt">透明感のある肌の20〜30代日本人女性が頬にそっと手を当てるビューティーポートレート。白背景、柔らかい光、ナチュラルメイク。下1/3に文字余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c2 3 5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 3-6 5-9z"/></svg>
       <h3>美容内服</h3>
       <span class="cat-price">1日あたり66円〜</span>
       <p>スキンケアの新常識</p>
       <span class="go">詳しく見る →</span>
     </div>
-    <div class="cat-card has-photo" data-group="p_pill" data-photo="pill">
+    <div class="cat-card" data-group="p_pill">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-06<span class="ph-size">480×366px</span></span>
+        <p class="ph-prompt">落ち着いた寝室で穏やかに微笑む20代の日本人女性。淡いピンク×白のトーン、朝の自然光、安心感のある雰囲気。下1/3に文字余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="9" width="18" height="6" rx="3"/><path d="M12 9v6"/></svg>
       <h3>ピル<br>(低用量/アフター)</h3>
       <span class="cat-price">月々3,500円〜</span>
       <p>オンラインで手軽に処方</p>
       <span class="go">詳しく見る →</span>
     </div>
-    <div class="cat-card has-photo" data-group="p_aga" data-photo="aga">
+    <div class="cat-card" data-group="p_aga">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-07<span class="ph-size">480×366px</span></span>
+        <p class="ph-prompt">明るい洗面所の鏡の前で髪を整える30〜40代の日本人男性。清潔感と前向きな雰囲気、自然光。下1/3に文字余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 20c0-6 2-9 2-12a4 4 0 0 1 8 0c0 3 2 6 2 12"/><path d="M9 12v6M12 10v8M15 12v6"/></svg>
       <h3>男性AGA</h3>
       <span class="cat-price">1日あたり220円〜</span>
       <p>大切な髪を適切にケアする</p>
       <span class="go">詳しく見る →</span>
     </div>
-    <div class="cat-card has-photo" data-group="p_exo" data-photo="exo">
+    <div class="cat-card" data-group="p_exo">
+      <div class="ph-frame" style="padding:9px;margin-bottom:auto;">
+        <span class="ph-id">P-08<span class="ph-size">480×533px（縦長）</span></span>
+        <p class="ph-prompt">光の粒子が舞う淡いブルーの背景に日本人女性の横顔のクローズアップ。再生医療・エイジングケアの先進的で上質なイメージ。下1/3に文字余白。</p>
+      </div>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="12" cy="17" r="2.2"/><path d="M8.7 8.3 10.5 15.3M15.3 8.3 13.5 15.3M9.2 7h5.6"/></svg>
       <h3>エクソソーム</h3>
       <span class="cat-price">37,000円〜</span>
@@ -1164,7 +1216,10 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 <!-- FLOW -->
 <section class="section" id="flow" style="padding-top:0;">
   <div class="section-head"><span class="en-label en">FLOW</span><h2>ご利用の流れ</h2><div class="rule"></div></div>
-  <img src="assets/img/flow.jpg" loading="lazy" alt="ご利用の流れ：LINEで友だち追加(約1分)、問診に回答(約5分)、医師のオンライン診察(約10分)、ご自宅にお届け(最短翌日)" style="width:100%;border-radius:14px;display:block;max-width:640px;margin:0 auto;">
+  <div class="ph-frame" style="aspect-ratio:1400/1120;max-width:640px;margin:0 auto;">
+    <span class="ph-id">P-09 利用の流れ図<span class="ph-size">1400×1120px</span></span>
+    <p class="ph-prompt">オンライン診療の利用手順を示す4ステップのインフォグラフィック。白×ネイビー×ブルーグレーの清潔な配色で、見出しは「ご利用の流れ」。横並びカード4枚：(1)「LINEで友だち追加」約1分・スマホでLINEを操作する女性の写真、(2)「問診に回答」約5分・問診フォームのスマホ画面、(3)「医師のオンライン診察」約10分・ビデオ通話に映る白衣の日本人医師、(4)「ご自宅にお届け」最短翌日・玄関で小箱を受け取る女性。各カードに丸アイコンと所要時間バッジ。最下部に濃緑の帯で「いつでも、どこでも、医師の診察を。」。</p>
+  </div>
 </section>
 
 <!-- FAQ -->
@@ -1219,7 +1274,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 
 <footer class="footer">
   <div class="fl-wrap">
-    <img class="footer-logo" src="assets/img/logo.png" loading="lazy" alt="Re:Design Clinic">
+    <span class="ph-frame ph-thumb" style="width:78px;height:30px;border-radius:6px;margin-bottom:16px;"><span>P-01</span></span>
     <ul>
       <li>※ 本ページに記載の治療はすべて自由診療（保険適用外）です。価格はすべて税込です。</li>
       <li>※ 記載の効果には個人差があり、効果を保証するものではありません。</li>
@@ -1256,7 +1311,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <span>商品詳細</span>
   </div>
   <div class="detail-body">
-    <img class="detail-img" id="detailImg" src="" alt="">
+    <div class="detail-img ph-frame" id="detailImg" style="border-radius:0;border-left:none;border-right:none;border-top:none;"></div>
     <div class="detail-content">
       <span class="cat-tag" id="detailCat"></span>
       <h1 class="serif" id="detailName"></h1>
@@ -1337,15 +1392,26 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </div>
 
 <script>
-const CAT_IMG = {"exo": "assets/img/cat_exo.jpg", "himan": "assets/img/cat_himan.jpg", "ed": "assets/img/cat_ed.jpg", "biyou": "assets/img/cat_biyou.jpg", "pill": "assets/img/cat_pill.jpg", "aga": "assets/img/cat_aga.jpg", "doctor_banner": "assets/img/cat_doctor_banner.jpg"};
-const dbImg = document.getElementById("doctorBannerImg");
-if (dbImg && CAT_IMG.doctor_banner) { dbImg.src = CAT_IMG.doctor_banner; }
-document.querySelectorAll(".cat-card[data-photo]").forEach(function(el){
-  var key = el.getAttribute("data-photo");
-  if (CAT_IMG[key]) { el.style.backgroundImage = "url(" + CAT_IMG[key] + ")"; }
-});
-
-const IMG = {"cynal": "assets/img/cynal.jpg", "secretome_white": "assets/img/secretome_white.jpg", "droethi": "assets/img/droethi.jpg", "tadalafil_10": "assets/img/tadalafil_10.jpg", "dienogest": "assets/img/dienogest.jpg", "frocin": "assets/img/frocin.jpg", "vardenafil_20": "assets/img/vardenafil_20.jpg", "manjaro_75": "assets/img/manjaro_75.jpg", "tadalafil_20": "assets/img/tadalafil_20.jpg", "dutasteride": "assets/img/dutasteride.jpg", "manjaro_5": "assets/img/manjaro_5.jpg", "manjaro_25": "assets/img/manjaro_25.jpg", "secretome_yellow": "assets/img/secretome_yellow.jpg", "vardenafil_general": "assets/img/vardenafil_general.jpg", "yubera": "assets/img/yubera.jpg", "manjaro_10": "assets/img/manjaro_10.jpg", "transamin": "assets/img/transamin.jpg"};
+// 商品画像プレースホルダ: id=通し番号 / size=元画像実寸 / prompt=画像生成用プロンプト
+const IMG_PH = {
+  manjaro_25:        {id:'P-10', size:'640×640px', prompt:'白背景のスタジオ医薬品撮影。GLP-1自己注射ペン（グレー×紫のキャップ）1本と「2.5mg」表記の外箱を斜めに配置。柔らかい影、余白広め、清潔で高級感のある物撮り。'},
+  manjaro_5:         {id:'P-11', size:'640×640px', prompt:'白背景のスタジオ医薬品撮影。GLP-1自己注射ペン（グレー×紫のキャップ）1本と「5mg」表記の外箱を斜めに配置。柔らかい影、余白広め、清潔で高級感のある物撮り。'},
+  manjaro_75:        {id:'P-12', size:'640×640px', prompt:'白背景のスタジオ医薬品撮影。GLP-1自己注射ペン（グレー×ティール）1本と「7.5mg」表記の外箱を斜めに配置。柔らかい影、余白広め、清潔で高級感のある物撮り。'},
+  manjaro_10:        {id:'P-13', size:'640×640px', prompt:'白背景のスタジオ医薬品撮影。GLP-1自己注射ペン（グレー×ブルー）1本と「10mg」表記の外箱を斜めに配置。柔らかい影、余白広め、清潔で高級感のある物撮り。'},
+  droethi:           {id:'P-14', size:'640×640px', prompt:'白背景のスタジオ撮影。低用量ピルのPTPシート（28錠・淡いピンクの小さな錠剤）と白い外箱。明るく清潔な医薬品写真。'},
+  dienogest:         {id:'P-15', size:'640×513px', prompt:'白背景のスタジオ撮影。白い小型錠剤のPTPシート2枚とシンプルな白い外箱。ジェネリック医薬品らしい端正なパッケージ写真。'},
+  cynal:             {id:'P-16', size:'640×640px', prompt:'白背景のスタジオ撮影。ビタミンC配合内服薬の外箱（白×オレンジ）とPTPシート、黄色の糖衣錠を数粒散らす。明るく健康的な医薬品写真。'},
+  transamin:         {id:'P-17', size:'640×640px', prompt:'白背景のスタジオ撮影。白いカプセル剤のPTPシートと白×青の外箱。落ち着いた清潔な医薬品写真。'},
+  yubera:            {id:'P-18', size:'640×640px', prompt:'白背景のスタジオ撮影。ビタミンE製剤の外箱（白×赤茶）と赤褐色のソフトカプセル数粒、PTPシート。柔らかい影の物撮り。'},
+  secretome_white:   {id:'P-19', size:'640×640px', prompt:'白背景のスタジオ撮影。幹細胞培養上清液の小さなガラスバイアル（白ラベル・透明の液体）と白い点鼻スプレー容器。高級美容医療のクリーンな物撮り。'},
+  secretome_yellow:  {id:'P-20', size:'640×640px', prompt:'白背景のスタジオ撮影。幹細胞培養上清液の小さなガラスバイアル（黄ラベル・淡い琥珀色の液体）と白い点鼻スプレー容器。高級美容医療のクリーンな物撮り。'},
+  tadalafil_10:      {id:'P-21', size:'640×640px', prompt:'白背景のスタジオ撮影。「タダラフィル10mg」表記のPTPシート（黄色の楕円錠）と外箱。落ち着いたトーンの清潔な医薬品写真。'},
+  tadalafil_20:      {id:'P-22', size:'640×640px', prompt:'白背景のスタジオ撮影。「タダラフィル20mg」表記のPTPシート（黄色の楕円錠）と外箱。落ち着いたトーンの清潔な医薬品写真。'},
+  vardenafil_general:{id:'P-23', size:'640×640px', prompt:'白背景のスタジオ撮影。「バルデナフィル10mg」表記のPTPシート（オレンジの丸錠）と外箱。落ち着いたトーンの清潔な医薬品写真。'},
+  vardenafil_20:     {id:'P-24', size:'640×640px', prompt:'白背景のスタジオ撮影。「バルデナフィル20mg」表記のPTPシート（オレンジの丸錠）と外箱。落ち着いたトーンの清潔な医薬品写真。'},
+  dutasteride:       {id:'P-25', size:'640×640px', prompt:'白背景のスタジオ撮影。「デュタステリド0.5mg」表記のソフトカプセル（白・楕円）のPTPシートと外箱。清潔で端正な医薬品写真。'},
+  frocin:            {id:'P-26', size:'640×640px', prompt:'白背景のスタジオ撮影。外用育毛剤の30mlプラスチックボトル（白ボトル・緑のラベル）と外箱。清潔で端正な医薬品写真。'},
+};
 
 const groups = {
   p_himan: {label:'肥満', note:'週1回の自己注射タイプ。医師の診察のうえ、体調に合わせて用量を調整します。', items:[
@@ -1426,7 +1492,7 @@ function buildRowsHtml(g){
     <tr data-id="${it.id}">
       <td colspan="2" style="padding:0;border:none;">
         <div class="drug-head">
-          <img src="${IMG[it.img]}" alt="${it.name}" loading="lazy">
+          <div class="ph-frame ph-thumb"><span>${IMG_PH[it.img].id}</span></div>
           <h3>${it.name}<small>${it.spec}</small></h3>
           <span class="chev">詳細 ›</span>
         </div>
@@ -1472,8 +1538,9 @@ const subscriptionEl = document.getElementById('subscriptionView');
 function renderDetail(id){
   const it = allItems[id];
   if(!it) return false;
-  document.getElementById('detailImg').src = IMG[it.img];
-  document.getElementById('detailImg').alt = it.name;
+  const ph = IMG_PH[it.img];
+  document.getElementById('detailImg').innerHTML =
+    `<span class="ph-id">${ph.id} ${it.name}<span class="ph-size">${ph.size}</span></span><p class="ph-prompt">${ph.prompt}</p>`;
   document.getElementById('detailCat').textContent = it.cat;
   document.getElementById('detailName').textContent = it.name;
   document.getElementById('detailSpec').textContent = it.spec;
