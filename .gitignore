@@ -1,0 +1,4 @@
+_deploy/
+
+# Local Netlify folder
+.netlify
