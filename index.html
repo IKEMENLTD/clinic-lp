@@ -6,16 +6,15 @@
 <meta name="theme-color" content="#FAF9F6">
 <meta name="supported-color-schemes" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Re:Design Clinic｜スマホで完結するオンライン診療</title>
-<meta name="description" content="医療ダイエット・ピル・美容内服・ED・AGA治療をオンラインで。医師の診察のもと、お薬をご自宅までお届けします。">
-<meta property="og:title" content="Re:Design Clinic｜スマホで完結するオンライン診療">
-<meta property="og:description" content="医療ダイエット・ピル・美容内服・ED・AGA治療をオンラインで。医師の診察のもと、お薬をご自宅までお届けします。">
+<title>Re:Design Clinic｜医療ダイエット オンライン診療</title>
+<meta name="description" content="GIP/GLP-1注射薬による医療ダイエットをオンラインで。医師の診察のもと、お薬をご自宅までお届け。ピル・美容内服・ED・AGA治療にも対応。">
+<meta property="og:title" content="Re:Design Clinic｜医療ダイエット オンライン診療">
+<meta property="og:description" content="GIP/GLP-1注射薬による医療ダイエットをオンラインで。医師の診察のもと、お薬をご自宅までお届けします。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#FAFCFF;
@@ -33,6 +32,9 @@
   --platinum:#8B8F98;
   --platinum-deep:#5C5F68;
   --platinum-soft:#ECEDF0;
+  --accent:#D96C93;
+  --accent-deep:#B94A6E;
+  --accent-soft:#FBE9F0;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;background:#FAF9F6;color-scheme:light only;}
@@ -48,38 +50,76 @@ img{max-width:100%;display:block;}
 .serif{font-family:'Shippori Mincho',serif;}
 .en{font-family:'Cormorant Garamond',serif;letter-spacing:.16em;}
 body.locked{overflow:hidden;height:100vh;}
+h1,h2,h3,.serif,.goal-badge,.plan-lead,.problem-title,.mech-catch,.emotion-band h2{font-feature-settings:"palt" 1;}
 
-/* ---------- SPLASH ---------- */
-#splash{
-  position:fixed;inset:0;z-index:1000;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  background:
-    radial-gradient(120% 90% at 15% 0%, rgba(255,228,235,.55), transparent 60%),
-    radial-gradient(100% 80% at 100% 100%, rgba(214,231,253,.65), transparent 60%),
-    linear-gradient(160deg,#FDF9FB,#F3F6FC 55%,#FBF3F6 100%);
-  transition:transform .7s cubic-bezier(.65,0,.35,1);
-  overflow:hidden;
+/* ---------- curved section transitions ---------- */
+section.curved{position:relative;padding-top:100px;}
+.curve-top{position:absolute;top:-1px;left:0;width:100%;height:44px;display:block;pointer-events:none;}
+
+/* ---------- scroll reveal (JS-guarded; no-JS and reduced-motion stay visible) ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:none;}
+
+/* ---------- drug accordions ---------- */
+.drug-acc{max-width:640px;margin:0 auto 10px;border-radius:12px;overflow:hidden;border:1px solid var(--hair);background:var(--card);}
+.drug-acc summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+  padding:13px 16px;background:linear-gradient(120deg,var(--gold-deep),var(--gold));
+  color:#fff;font-size:13.5px;font-weight:800;letter-spacing:.04em;
 }
-#splash.hide{transform:translateY(-100%);}
-#splash img{height:52px;width:auto;opacity:0;animation:fadeUp 1s ease .15s forwards;}
-#splash .catch{
-  font-family:'Shippori Mincho',serif;color:var(--ink);
-  font-size:clamp(20px,6vw,30px);letter-spacing:.08em;text-align:center;
-  line-height:1.95;opacity:0;animation:fadeUp 1s ease .45s forwards;
+.drug-acc summary::-webkit-details-marker{display:none;}
+.drug-acc summary svg{width:24px;height:24px;flex:none;background:#fff;color:var(--gold-deep);border-radius:50%;padding:5px;}
+.drug-acc summary .chev{margin-left:auto;font-size:11px;transition:transform .2s;}
+.drug-acc[open] summary .chev{transform:rotate(180deg);}
+.drug-acc .acc-body{padding:12px;}
+.drug-acc .acc-note{font-size:11px;color:var(--muted);margin:2px 2px 10px;}
+
+/* ---------- emotion band ---------- */
+.emotion-band{
+  background:linear-gradient(180deg,#BFD9F2,#DCEBFA 55%,#F3F8FD);
+  text-align:center;padding:72px 24px;
 }
-#splash .sub{
-  font-size:11px;letter-spacing:.3em;color:#8B8F98;text-transform:uppercase;
-  opacity:0;animation:fadeUp 1s ease .05s forwards;
+.emotion-band h2{
+  font-family:'Shippori Mincho',serif;font-weight:600;
+  font-size:clamp(19px,5.4vw,26px);letter-spacing:.08em;line-height:2.2;color:var(--ink);
 }
-#splash .hint{
-  position:absolute;bottom:38px;font-size:10.5px;color:var(--muted);
-  letter-spacing:.15em;opacity:0;animation:fadeUp .9s ease 1.1s forwards;
+.emotion-band h2 b{color:var(--gold-deep);}
+.emotion-band p{font-size:12.5px;color:var(--ink-soft);margin-top:18px;line-height:2.1;max-width:34em;margin-left:auto;margin-right:auto;}
+
+/* ---------- image placeholder frames ---------- */
+.ph-frame{
+  border:2px dashed #A9BBD4;
+  background:repeating-linear-gradient(45deg,#F4F8FE,#F4F8FE 12px,#EDF3FC 12px,#EDF3FC 24px);
+  border-radius:12px;display:flex;flex-direction:column;justify-content:center;
+  padding:14px;gap:6px;color:var(--ink-soft);overflow:hidden;
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.ph-frame .ph-id{
+  font-size:10.5px;font-weight:800;color:var(--gold-deep);letter-spacing:.08em;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+.ph-frame .ph-id::before{
+  content:"IMG";background:var(--gold-deep);color:#fff;font-size:8.5px;
+  padding:1px 7px;border-radius:4px;letter-spacing:.1em;
+}
+.ph-frame .ph-size{font-size:8.5px;font-weight:500;color:var(--muted);letter-spacing:.02em;}
+.ph-frame .ph-prompt{font-size:9.5px;line-height:1.7;color:var(--ink-soft);user-select:all;}
+.ph-thumb{
+  width:46px;height:46px;border-radius:8px;flex:none;padding:0;
+  display:grid;place-items:center;border-width:1.5px;gap:0;
+}
+.ph-thumb span{font-size:8px;font-weight:800;color:var(--gold-deep);letter-spacing:.02em;}
+
+/* ---------- compliance bar ---------- */
+.compliance-bar{
+  background:var(--ink);color:#fff;
+  font-size:9.5px;letter-spacing:.04em;text-align:center;
+  padding:5px 10px;line-height:1.5;
+  position:relative;z-index:101;
+}
 
 /* ---------- header ---------- */
 .header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:sticky;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:13px 20px;
   background:rgba(250,252,255,.92);
@@ -95,53 +135,160 @@ body.locked{overflow:hidden;height:100vh;}
 
 /* ---------- hero ---------- */
 .hero{
-  position:relative;
+  position:relative;z-index:0;
   background:
-    radial-gradient(120% 80% at 85% 0%, rgba(66,140,112,.28), transparent 55%),
+    radial-gradient(120% 80% at 85% 0%, rgba(217,108,147,.14), transparent 55%),
+    radial-gradient(100% 80% at 0% 100%, rgba(108,147,201,.14), transparent 55%),
     var(--paper);
-  padding:112px 22px 60px;
+  padding:34px 22px 46px;
   overflow:hidden;
 }
-.hero-logo{height:44px;width:auto;margin-bottom:20px;}
-.hero .eyebrow{
-  display:inline-block;color:var(--gold-deep);
-  font-size:11px;letter-spacing:.3em;
-  border-bottom:1px solid var(--gold);
-  padding-bottom:6px;margin-bottom:22px;
+.hero::before{
+  content:"";position:absolute;z-index:-1;top:-70px;right:-70px;
+  width:240px;height:240px;border-radius:50%;
+  border:1.5px dashed rgba(185,74,110,.28);
 }
+.hero::after{
+  content:"";position:absolute;z-index:-1;bottom:20px;left:-30px;
+  width:210px;height:210px;opacity:.45;
+  background:radial-gradient(circle, rgba(108,147,201,.5) 1.5px, transparent 1.6px) 0 0/16px 16px;
+}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.hero>*{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both;}
+.hero>*:nth-child(2){animation-delay:.06s;}
+.hero>*:nth-child(3){animation-delay:.12s;}
+.hero>*:nth-child(4){animation-delay:.18s;}
+.hero>*:nth-child(5){animation-delay:.24s;}
+.hero>*:nth-child(6){animation-delay:.3s;}
+.hero>*:nth-child(7){animation-delay:.36s;}
+.hero>*:nth-child(8){animation-delay:.42s;}
+.hero>*:nth-child(9){animation-delay:.48s;}
+.hero>*:nth-child(10){animation-delay:.54s;}
+.hero-logo{height:40px;width:auto;margin-bottom:18px;}
+.hero-badges{display:flex;gap:10px;margin-bottom:18px;}
+.hero-badge{
+  width:78px;height:78px;border-radius:50%;flex:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;font-size:10px;font-weight:700;line-height:1.35;letter-spacing:.02em;
+  color:var(--gold-deep);background:var(--card);border:1.5px solid var(--gold-soft);
+  box-shadow:0 6px 16px rgba(74,102,144,.10);
+}
+.hero-badge b{font-size:13.5px;color:var(--accent-deep);}
+.hero-badge small{font-size:8px;font-weight:500;color:var(--muted);}
+.goal-badge{
+  display:inline-block;position:relative;
+  background:#fff;border:2px solid var(--accent);border-radius:12px;
+  padding:9px 18px;margin-bottom:16px;transform:rotate(-2deg);
+  font-family:'Shippori Mincho',serif;font-size:15px;font-weight:700;color:var(--ink);
+  box-shadow:0 8px 18px rgba(217,108,147,.18);
+}
+.goal-badge b{font-size:22px;color:var(--accent-deep);}
+.goal-badge sup{font-size:9px;color:var(--muted);}
 .hero h1{
   font-family:'Shippori Mincho',serif;
-  font-weight:600;font-size:clamp(25px,6.8vw,40px);
-  line-height:1.6;letter-spacing:.04em;margin-bottom:18px;color:var(--ink);
+  font-weight:600;font-size:clamp(27px,7.4vw,42px);
+  line-height:1.5;letter-spacing:.05em;margin-bottom:6px;color:var(--ink);
 }
-.hero h1 em{font-style:normal;color:var(--gold-deep);}
-.hero p.lead{font-size:13.5px;color:var(--muted);margin-bottom:28px;max-width:34em;}
-.hero .points{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
-.hero .points span{
-  font-size:11.5px;letter-spacing:.05em;color:var(--gold-deep);
-  background:var(--card);
-  border:1px solid var(--gold-soft);
-  padding:7px 14px;border-radius:999px;
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(120deg,var(--gold-deep),var(--accent-deep));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
+.hero .subline{
+  display:inline-block;font-size:11px;letter-spacing:.3em;color:var(--gold-deep);
+  border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);
+  padding:4px 10px;margin:8px 0 22px;
+}
+.hero p.lead{font-size:13px;color:var(--muted);margin:0 auto 24px;max-width:34em;}
+
+/* offer card */
+.offer-card{
+  max-width:560px;position:relative;
+  border-radius:18px;overflow:hidden;
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(var(--card),var(--card)) padding-box,
+    linear-gradient(120deg,var(--accent),var(--gold)) border-box;
+  box-shadow:
+    0 1px 3px rgba(185,74,110,.10),
+    0 24px 48px -20px rgba(185,74,110,.38);
+  margin-bottom:20px;
+}
+.offer-card .oc-head{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(120deg,var(--accent-deep),var(--accent));
+  color:#fff;padding:13px 18px;
+  font-size:15.5px;font-weight:800;letter-spacing:.04em;
+}
+.offer-card .oc-head::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 40%, rgba(255,255,255,.25) 50%, transparent 60%);
+  animation:subShine 3.2s ease-in-out infinite;
+}
+.oc-flag{
+  margin-left:auto;flex:none;
+  font-size:9.5px;font-weight:700;letter-spacing:.04em;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.55);
+  padding:3px 10px;border-radius:999px;
+}
+.offer-card .oc-head svg{width:30px;height:30px;flex:none;background:#fff;color:var(--accent-deep);border-radius:50%;padding:6px;}
+.offer-card .oc-head small{display:block;font-size:10px;font-weight:500;opacity:.9;}
+.offer-card .oc-body{padding:18px 18px 16px;display:flex;align-items:center;gap:14px;}
+.offer-card .oc-label{
+  flex:none;font-size:11px;font-weight:700;color:var(--ink);
+  border:1px solid var(--ink);border-radius:8px;padding:5px 9px;line-height:1.4;text-align:center;
+}
+.offer-card .oc-price{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:44px;line-height:1;color:var(--accent-deep);letter-spacing:-.02em;}
+.offer-card .oc-price .yen{font-size:18px;font-weight:700;}
+.offer-card .oc-price .tax{font-size:10px;font-weight:500;color:var(--muted);letter-spacing:0;}
+.offer-card .oc-note{padding:0 18px 14px;font-size:9.5px;color:var(--muted);line-height:1.6;}
+.footnotes{font-size:9.5px;color:var(--muted);line-height:1.7;margin-top:14px;max-width:560px;}
+
 .btn-line{
+  position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;gap:10px;
   background:linear-gradient(180deg,var(--line),var(--line-deep));
   color:#fff;text-decoration:none;font-weight:700;
   font-size:16px;letter-spacing:.04em;
-  padding:17px 26px;border-radius:999px;
-  box-shadow:0 10px 24px rgba(6,199,85,.28);
+  padding:17px 40px 17px 26px;border-radius:999px;
+  box-shadow:0 2px 5px rgba(5,166,72,.25), 0 14px 28px -8px rgba(6,199,85,.45);
   max-width:440px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn-line::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+  animation:subShine 3s ease-in-out infinite;
+}
+.btn-line::after{
+  content:"›";position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:19px;font-weight:700;opacity:.9;
 }
 .btn-line .ico{
   width:26px;height:26px;flex:none;border-radius:6px;background:#fff;
   display:grid;place-items:center;color:var(--line);font-weight:800;font-size:11px;
 }
 .btn-line small{display:block;font-weight:500;font-size:10.5px;opacity:.92;letter-spacing:.02em;}
+.cta-microcopy{
+  text-align:center;font-size:11px;font-weight:700;color:var(--line-deep);
+  letter-spacing:.06em;margin-bottom:8px;max-width:440px;
+}
 .hero .note{font-size:10.5px;color:var(--muted);margin-top:14px;}
 
 /* doctor banner */
-.doctor-banner{padding:0 20px;margin:44px auto 0;max-width:900px;}
+.doctor-banner{padding:0 20px;margin:40px auto 0;max-width:900px;}
 .doctor-banner img{width:100%;border-radius:16px;display:block;box-shadow:0 14px 34px rgba(46,43,36,.12);}
+
+/* ---------- plan branching ---------- */
+.plan-lead{
+  max-width:560px;margin:0 auto 22px;text-align:center;
+  background:linear-gradient(120deg,var(--accent-deep),var(--accent));
+  color:#fff;border-radius:12px;padding:12px 16px;
+  font-size:14px;font-weight:800;letter-spacing:.04em;
+}
+.plan-lead.blue{background:linear-gradient(120deg,var(--gold-deep),var(--gold));}
+.plan-catch{text-align:center;font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.06em;margin-bottom:10px;}
 
 /* ---------- category grid ---------- */
 .cat-section{padding:52px 20px 20px;}
@@ -158,12 +305,17 @@ body.locked{overflow:hidden;height:100vh;}
 .cat-card h3{font-family:'Shippori Mincho',serif;font-size:14px;color:var(--ink);letter-spacing:.03em;}
 .cat-card p{font-size:10.5px;color:var(--muted);line-height:1.6;}
 .cat-card .go{font-size:10.5px;color:var(--gold-deep);margin-top:1px;}
+.cat-card .cat-price{
+  font-size:10px;font-weight:800;color:#fff;background:var(--accent);
+  display:inline-block;align-self:flex-start;
+  padding:2px 9px;border-radius:999px;letter-spacing:.03em;
+}
 .cat-card.has-photo{background-size:cover;background-position:center;justify-content:flex-end;}
 .cat-card.has-photo::before{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg, rgba(46,43,36,0) 30%, rgba(30,28,22,.86) 92%);
 }
-.cat-card.has-photo svg,.cat-card.has-photo h3,.cat-card.has-photo p,.cat-card.has-photo .go{position:relative;z-index:1;}
+.cat-card.has-photo svg,.cat-card.has-photo h3,.cat-card.has-photo p,.cat-card.has-photo .go,.cat-card.has-photo .cat-price{position:relative;z-index:1;}
 .cat-card.has-photo svg{color:#F3EFE6;}
 .cat-card.has-photo h3{color:#FFFDF8;}
 .cat-card.has-photo p{color:rgba(255,253,248,.82);}
@@ -172,12 +324,277 @@ body.locked{overflow:hidden;height:100vh;}
 /* ---------- sections ---------- */
 .section{padding:60px 20px;}
 .section-head{text-align:center;margin-bottom:34px;}
-.section-head .en-label{color:var(--gold-deep);font-size:11px;display:block;margin-bottom:10px;}
+.section-head .en-label{
+  color:var(--gold-deep);font-size:11px;font-style:italic;
+  display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;
+}
+.section-head .en-label::before,.section-head .en-label::after{
+  content:"";width:26px;height:1px;background:var(--gold);opacity:.55;
+}
 .section-head h2{
   font-family:'Shippori Mincho',serif;font-weight:600;
   font-size:clamp(20px,5.4vw,28px);letter-spacing:.08em;color:var(--ink);
 }
+.section-head h2 .accent{color:var(--accent-deep);}
 .section-head .rule{width:34px;height:1px;background:var(--gold);margin:16px auto 0;}
+
+/* ---------- dose matrix ---------- */
+.matrix-wrap{max-width:640px;margin:0 auto;}
+.matrix-card{background:var(--card);border:1px solid var(--hair);border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 10px 26px rgba(74,102,144,.08);}
+.matrix-card .mx-head{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(120deg,var(--accent-deep),var(--accent));
+  color:#fff;padding:12px 16px;font-size:14px;font-weight:800;letter-spacing:.04em;
+}
+.matrix-card .mx-head svg{width:26px;height:26px;flex:none;background:#fff;color:var(--accent-deep);border-radius:50%;padding:5px;}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px;}
+table.matrix th{
+  background:var(--accent-soft);color:var(--accent-deep);font-weight:800;
+  padding:8px 6px;border:1px solid var(--hair);text-align:center;font-size:12.5px;
+}
+table.matrix td{padding:11px 6px;border:1px solid var(--hair);text-align:center;color:var(--ink);}
+table.matrix td.rowlab{
+  font-size:10px;font-weight:800;color:#fff;background:var(--accent);
+  border-radius:0;width:64px;line-height:1.4;padding:6px 4px;
+}
+table.matrix td.rowlab.single{background:var(--platinum);}
+table.matrix .big{font-size:15px;font-weight:800;color:var(--accent-deep);}
+table.matrix .big small{display:block;font-size:9px;font-weight:500;color:var(--muted);}
+table.matrix .plain{font-size:13.5px;font-weight:600;}
+.matrix-note{font-size:9.5px;color:var(--muted);line-height:1.7;margin:10px 2px 0;}
+
+/* ---------- check cards (convenience) ---------- */
+.check-grid{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.check-card{
+  position:relative;background:var(--card);border:1px solid var(--hair);border-radius:14px;
+  padding:26px 14px 18px;text-align:center;
+  box-shadow:0 8px 20px rgba(74,102,144,.07);
+}
+.check-card .ck{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;
+  display:grid;place-items:center;
+}
+.check-card .ck svg{width:14px;height:14px;}
+.check-card>svg{width:34px;height:34px;color:var(--gold-deep);margin:0 auto 10px;}
+.check-card h3{font-size:13.5px;font-weight:700;color:var(--ink);letter-spacing:.03em;margin-bottom:4px;}
+.check-card h3 b{color:var(--accent-deep);}
+.check-card p{font-size:10px;color:var(--muted);line-height:1.6;}
+
+/* ---------- promise ---------- */
+.promise-box{
+  max-width:640px;margin:0 auto;background:var(--card);
+  border:1px solid var(--hair);border-radius:16px;overflow:hidden;
+  box-shadow:0 10px 26px rgba(74,102,144,.08);
+}
+.promise-box .pr-head{
+  background:linear-gradient(120deg,var(--gold-deep),var(--gold));
+  color:#fff;text-align:center;padding:11px 16px;
+  font-size:13.5px;font-weight:700;letter-spacing:.2em;
+}
+.promise-box ul{list-style:none;padding:18px 20px;display:grid;gap:14px;}
+.promise-box li{display:flex;gap:10px;font-size:13px;color:var(--ink);line-height:1.7;}
+.promise-box li b{color:var(--gold-deep);}
+.promise-box li svg{width:20px;height:20px;flex:none;color:var(--accent);margin-top:3px;}
+
+/* ---------- stat rings ---------- */
+.stat-grid{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.stat-card{
+  border-radius:14px;padding:20px 8px;text-align:center;color:#fff;
+}
+.stat-card:nth-child(1){background:linear-gradient(160deg,#67BBAE,#4A9C90);}
+.stat-card:nth-child(2){background:linear-gradient(160deg,var(--accent),var(--accent-deep));}
+.stat-card:nth-child(3){background:linear-gradient(160deg,var(--gold),var(--gold-deep));}
+.stat-card .ring{
+  width:78px;height:78px;border-radius:50%;position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 10px;
+  background:conic-gradient(rgba(255,255,255,.95) 0 76%, rgba(255,255,255,.25) 0);
+}
+.stat-card .ring::before{content:"";position:absolute;inset:5px;border-radius:50%;}
+.stat-card:nth-child(1) .ring::before{background:#59A99C;}
+.stat-card:nth-child(2) .ring::before{background:#C75E82;}
+.stat-card:nth-child(3) .ring::before{background:#5D80B1;}
+.stat-card .ring b{font-size:15px;line-height:1.2;position:relative;z-index:1;}
+.stat-card .ring small{font-size:8.5px;opacity:.9;position:relative;z-index:1;}
+.stat-card p{font-size:10.5px;font-weight:700;letter-spacing:.04em;line-height:1.5;}
+
+/* ---------- attention ---------- */
+.attention-box{
+  max-width:640px;margin:0 auto;position:relative;
+  background:#FFFBEA;border:2px solid #F2C94C;border-radius:4px;
+  padding:26px 18px 20px;text-align:center;
+}
+.attention-box .att-label{
+  position:absolute;top:-12px;left:18px;background:#FFFBEA;padding:0 10px;
+  font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.3em;color:#C9A227;font-weight:600;
+}
+.attention-box p{font-size:13px;color:var(--ink);line-height:1.9;}
+.attention-box p b{color:var(--accent-deep);border-bottom:2px solid var(--accent);}
+
+/* ---------- problem (dark) ---------- */
+.problem-section{
+  background:
+    radial-gradient(90% 50% at 15% 10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(80% 45% at 90% 85%, rgba(108,147,201,.14), transparent 60%),
+    linear-gradient(180deg,#3E4A5C,#55657D);
+  padding:64px 20px;color:#E8EDF5;
+}
+.problem-title{
+  max-width:560px;margin:0 auto 40px;text-align:center;
+  font-family:'Shippori Mincho',serif;font-size:clamp(18px,5vw,24px);
+  letter-spacing:.06em;line-height:2;color:#fff;
+}
+.problem-title mark{
+  background:none;color:#fff;padding:2px 10px;border:1px solid rgba(255,255,255,.7);
+}
+.bubble-grid{max-width:560px;margin:0 auto;display:grid;gap:14px;}
+.bubble{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
+  border-radius:14px;padding:16px 18px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  box-shadow:0 10px 24px -12px rgba(20,26,36,.5);
+}
+.bubble:nth-child(even){flex-direction:row-reverse;text-align:right;}
+.bubble svg{width:34px;height:34px;flex:none;color:#AFC3E0;}
+.bubble p{font-size:13.5px;font-weight:700;letter-spacing:.04em;color:#fff;}
+.bubble small{display:block;font-size:10.5px;font-weight:400;color:#C6D2E4;margin-top:2px;}
+.pivot-label{
+  max-width:200px;margin:44px auto 0;text-align:center;
+  background:#fff;color:var(--ink);border-radius:4px;
+  font-family:'Shippori Mincho',serif;font-size:16px;font-weight:700;letter-spacing:.2em;
+  padding:9px 0;position:relative;
+}
+.pivot-label::after{
+  content:"";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);
+  border:10px solid transparent;border-top-color:#fff;border-bottom:none;
+}
+
+/* ---------- mechanism ---------- */
+.mech-section{background:var(--paper-deep);padding:64px 20px;}
+.mech-catch{
+  max-width:560px;margin:0 auto 34px;text-align:center;
+  font-family:'Shippori Mincho',serif;font-size:clamp(17px,4.8vw,23px);
+  color:var(--ink);letter-spacing:.05em;line-height:2;
+}
+.mech-catch mark{background:linear-gradient(transparent 62%, var(--accent-soft) 62%);color:var(--accent-deep);}
+.glp-hero{text-align:center;margin-bottom:26px;}
+.glp-hero .tag{
+  display:inline-block;font-size:11.5px;font-weight:700;color:var(--gold-deep);
+  border:1px solid var(--gold);border-radius:999px;padding:5px 16px;margin-bottom:10px;background:var(--card);
+}
+.glp-hero .big-word{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(52px,16vw,84px);line-height:1;
+  background:linear-gradient(120deg,var(--gold-deep),var(--accent-deep));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:.02em;
+}
+.glp-hero p{font-size:13px;color:var(--ink-soft);margin-top:8px;}
+.glp-box{
+  max-width:560px;margin:0 auto 30px;
+  background:linear-gradient(150deg,var(--gold-deep),var(--gold));
+  border-radius:16px;padding:20px 18px;color:#fff;
+}
+.glp-box .gb-title{text-align:center;font-size:13.5px;font-weight:700;line-height:1.9;margin-bottom:14px;}
+.glp-box .gb-title u{text-underline-offset:4px;}
+.glp-box ul{list-style:none;background:#fff;border-radius:12px;padding:6px 16px;display:grid;}
+.glp-box li{
+  display:flex;align-items:center;gap:10px;padding:12px 2px;
+  font-size:14px;font-weight:700;color:var(--ink);
+  border-bottom:1px solid var(--hair);
+}
+.glp-box li:last-child{border-bottom:none;}
+.glp-box li b{color:var(--gold-deep);}
+.glp-box li .ck{
+  width:24px;height:24px;border-radius:50%;background:var(--gold);color:#fff;
+  display:grid;place-items:center;flex:none;
+}
+.glp-box li .ck svg{width:13px;height:13px;}
+.compare-grid{max-width:560px;margin:0 auto 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;}
+.compare-grid::after{
+  content:"VS";position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:#fff;border:1px solid var(--hair);
+  display:grid;place-items:center;
+  font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--ink);
+  box-shadow:0 5px 12px rgba(51,59,71,.14);
+}
+.compare-card{border-radius:14px;padding:18px 12px;text-align:center;}
+.compare-card.bad{background:#E9EEF6;border:1px solid var(--hair);}
+.compare-card.good{background:var(--accent-soft);border:1px solid var(--accent);}
+.compare-card .cc-cond{font-size:11.5px;font-weight:700;line-height:1.6;margin-bottom:10px;}
+.compare-card.bad .cc-cond{color:var(--ink-soft);}
+.compare-card.good .cc-cond{color:var(--accent-deep);}
+.compare-card svg{width:56px;height:56px;margin:0 auto 10px;}
+.compare-card.bad svg{color:#9AA8BC;}
+.compare-card.good svg{color:var(--accent);}
+.compare-card .cc-result{
+  display:inline-block;background:#fff;border-radius:8px;padding:6px 14px;
+  font-family:'Shippori Mincho',serif;font-size:14.5px;font-weight:700;
+}
+.compare-card.bad .cc-result{color:var(--ink);border:1px solid var(--platinum);}
+.compare-card.good .cc-result{color:var(--accent-deep);border:1px solid var(--accent);}
+.mech-conclusion{
+  max-width:560px;margin:26px auto 0;text-align:center;
+  font-size:14.5px;line-height:2.1;color:var(--ink);
+}
+.mech-conclusion b{
+  color:var(--accent-deep);font-size:16px;
+  background:linear-gradient(transparent 62%, #fff 62%);
+}
+
+/* ---------- product feature (manjaro detail) ---------- */
+.pf-card{
+  max-width:640px;margin:0 auto;
+  background:var(--card);border:1px solid var(--hair);border-radius:18px;overflow:hidden;
+  box-shadow:0 14px 32px rgba(74,102,144,.10);
+}
+.pf-head{
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(120deg,var(--accent-deep),var(--accent));
+  color:#fff;padding:16px 18px;font-size:16px;font-weight:800;letter-spacing:.04em;
+}
+.pf-head svg{width:34px;height:34px;flex:none;background:#fff;color:var(--accent-deep);border-radius:50%;padding:7px;}
+.pf-head small{display:block;font-size:10px;font-weight:500;opacity:.9;}
+.pf-body{padding:24px 18px;}
+.pf-catch{text-align:center;font-size:14px;font-weight:700;color:var(--ink);line-height:1.9;margin-bottom:6px;}
+.pf-catch u{color:var(--accent-deep);text-decoration-color:var(--accent);text-underline-offset:4px;}
+.pf-sub{text-align:center;font-size:12.5px;font-weight:700;color:var(--accent-deep);margin-bottom:18px;}
+.pf-graph{background:var(--paper-deep);border-radius:12px;padding:16px 10px 8px;margin-bottom:6px;}
+.pf-graph svg{width:100%;height:auto;display:block;}
+.pf-graph-note{font-size:9px;color:var(--muted);line-height:1.6;margin-bottom:18px;padding:0 4px;}
+.point-box{border:2px solid var(--accent);border-radius:4px;position:relative;padding:22px 16px 14px;margin-bottom:18px;}
+.point-box .pt-label{
+  position:absolute;top:-12px;left:14px;background:var(--card);padding:0 8px;
+  font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.2em;color:var(--accent-deep);font-weight:600;
+}
+.point-box ul{list-style:none;display:grid;gap:10px;}
+.point-box li{display:flex;gap:9px;font-size:12.5px;color:var(--ink);line-height:1.7;}
+.point-box li svg{width:18px;height:18px;flex:none;color:var(--accent);margin-top:3px;}
+.pf-note{font-size:11.5px;color:var(--ink-soft);line-height:1.9;margin-bottom:18px;}
+.pf-note b{color:var(--accent-deep);}
+.easy-band{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  background:var(--accent-soft);border-radius:12px;padding:14px;margin-bottom:20px;
+}
+.easy-band .eb-label{font-size:13px;font-weight:800;color:var(--ink);line-height:1.5;}
+.easy-chip{
+  width:64px;height:64px;border-radius:50%;background:var(--accent);color:#fff;flex:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;line-height:1.3;text-align:center;
+}
+.easy-chip small{font-size:8.5px;font-weight:500;}
+
+/* ---------- life change ---------- */
+.life-grid{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.life-card{
+  background:var(--card);border:1px solid var(--hair);border-radius:14px;
+  padding:22px 14px;text-align:center;
+  box-shadow:0 8px 20px rgba(74,102,144,.07);
+}
+.life-card svg{width:34px;height:34px;color:var(--accent);margin:0 auto 10px;}
+.life-card h3{font-family:'Shippori Mincho',serif;font-size:13.5px;color:var(--ink);letter-spacing:.04em;line-height:1.7;}
 
 /* features */
 .features{max-width:680px;margin:0 auto;display:grid;gap:12px;}
@@ -234,26 +651,6 @@ table.price td.p small{font-size:10px;color:var(--muted);font-family:'Noto Sans 
 }
 
 /* ---------- flow / faq ---------- */
-.flow{max-width:640px;margin:0 auto;}
-.step{display:flex;gap:16px;position:relative;padding-bottom:30px;}
-.step:last-child{padding-bottom:0;}
-.step::before{content:"";position:absolute;left:23px;top:50px;bottom:6px;width:1px;background:var(--gold-soft);}
-.step:last-child::before{display:none;}
-.step .num{
-  flex:none;width:47px;height:47px;border-radius:50%;
-  border:1px solid var(--gold);color:var(--gold-deep);background:var(--card);
-  display:grid;place-items:center;position:relative;z-index:1;
-}
-.step .num svg{width:22px;height:22px;}
-.step-body{padding-top:2px;}
-.step-title-row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px;}
-.step h3{font-family:'Shippori Mincho',serif;font-size:14.5px;color:var(--ink);letter-spacing:.04em;}
-.step .time{
-  font-size:10.5px;font-weight:700;color:var(--gold-deep);background:var(--gold-soft);
-  border:1px solid var(--gold);padding:2px 9px;border-radius:999px;white-space:nowrap;
-}
-.step p{font-size:12px;color:var(--muted);}
-
 .faq{max-width:680px;margin:0 auto;display:grid;gap:10px;}
 .faq details{background:var(--card);border:1px solid var(--hair);border-radius:12px;}
 .faq summary{
@@ -275,6 +672,21 @@ table.price td.p small{font-size:10px;color:var(--muted);font-family:'Noto Sans 
 .cta-band h2{font-family:'Shippori Mincho',serif;font-size:clamp(18px,5vw,25px);letter-spacing:.08em;margin-bottom:10px;color:var(--ink);}
 .cta-band p{font-size:12px;color:var(--muted);margin-bottom:26px;}
 .cta-band .btn-line{margin:0 auto;}
+
+/* ---------- notice tables ---------- */
+.notice-section{padding:56px 20px;background:var(--paper);}
+.notice-wrap{max-width:680px;margin:0 auto;}
+.notice-block{background:var(--card);border:1px solid var(--hair);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+.notice-block h3{
+  font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.04em;
+  padding:13px 16px;background:var(--paper-deep);border-bottom:1px solid var(--hair);
+}
+table.notice{width:100%;border-collapse:collapse;font-size:11px;line-height:1.8;}
+table.notice th{
+  width:88px;background:var(--accent-soft);color:var(--ink);font-weight:700;
+  padding:10px 8px;border-top:1px solid var(--hair);vertical-align:middle;text-align:center;font-size:10.5px;line-height:1.5;
+}
+table.notice td{padding:10px 12px;border-top:1px solid var(--hair);color:var(--ink-soft);}
 
 /* footer */
 .footer{background:var(--paper);color:var(--muted);padding:40px 22px 116px;font-size:10.5px;line-height:1.9;border-top:1px solid var(--hair);}
@@ -366,14 +778,11 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   0%{transform:translateX(-120%);}
   60%,100%{transform:translateX(120%);}
 }
-.sub-banner-icon{flex:none;font-size:22px;line-height:1;}
+.sub-banner-icon{flex:none;width:24px;height:24px;color:#fff;}
+.sub-banner-icon svg{width:24px;height:24px;display:block;}
 .sub-banner-text{flex:1;min-width:0;}
-.sub-banner-head{font-size:15px;font-weight:800;line-height:1.3;}
-.sub-banner-sub{font-size:11.5px;font-weight:500;opacity:.92;margin-top:2px;}
-.sub-banner-badge{
-  flex:none;background:#fff;color:var(--gold-deep);font-size:11px;font-weight:800;
-  padding:4px 10px;border-radius:999px;letter-spacing:.05em;
-}
+.sub-banner-head{font-size:15px;font-weight:800;line-height:1.3;display:block;}
+.sub-banner-sub{font-size:11.5px;font-weight:500;opacity:.92;margin-top:2px;display:block;}
 .sub-banner b{color:#fff;font-size:15px;}
 .sub-banner .arrow{flex:none;font-size:16px;opacity:.9;}
 #subscriptionView{
@@ -382,10 +791,6 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   overflow-y:auto;
 }
 #subscriptionView.open{transform:translateX(0);}
-.sub-table{width:100%;border-collapse:collapse;font-size:11.5px;}
-.sub-table th{background:var(--paper-deep);color:var(--ink-soft);font-weight:600;padding:8px 4px;border:1px solid var(--hair);text-align:center;font-size:10.5px;}
-.sub-table td{padding:10px 4px;border:1px solid var(--hair);text-align:center;color:var(--ink);}
-.sub-table td:nth-child(3){color:var(--gold-deep);font-weight:700;background:var(--gold-soft);}
 
 /* subscription page v2 */
 .sub-steps{display:flex;justify-content:space-between;gap:8px;padding:20px 4px 4px;}
@@ -431,28 +836,64 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 .sub-faq-item dt::before{content:"Q";flex:none;color:var(--gold-deep);font-family:'Cormorant Garamond',serif;}
 .sub-faq-item dd{font-size:12px;color:var(--muted);line-height:1.8;padding-left:18px;}
 
+/* flow steps */
+.flow{max-width:640px;margin:0 auto;}
+.step{display:flex;gap:16px;position:relative;padding-bottom:30px;}
+.step:last-child{padding-bottom:0;}
+.step::before{content:"";position:absolute;left:23px;top:50px;bottom:6px;width:1px;background:var(--gold-soft);}
+.step:last-child::before{display:none;}
+.step .num{
+  flex:none;width:47px;height:47px;border-radius:50%;
+  border:1px solid var(--gold);color:var(--gold-deep);background:var(--card);
+  display:grid;place-items:center;position:relative;z-index:1;
+}
+.step .num svg{width:22px;height:22px;}
+.step-body{padding-top:2px;}
+.step-title-row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px;}
+.step h3{font-family:'Shippori Mincho',serif;font-size:14.5px;color:var(--ink);letter-spacing:.04em;}
+.step .time{
+  font-size:10.5px;font-weight:700;color:var(--gold-deep);background:var(--gold-soft);
+  border:1px solid var(--gold);padding:2px 9px;border-radius:999px;white-space:nowrap;
+}
+.step p{font-size:12px;color:var(--muted);}
+
+/* ---------- hover states (pointer devices) ---------- */
+@media (hover:hover){
+  .btn-line:hover{transform:translateY(-2px);box-shadow:0 3px 6px rgba(5,166,72,.28), 0 20px 36px -8px rgba(6,199,85,.5);}
+  .cat-card:hover{transform:translateY(-3px);box-shadow:0 16px 32px -12px rgba(74,102,144,.28);}
+  .check-card:hover,.life-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -12px rgba(74,102,144,.24);}
+  .check-card,.life-card,.cat-card{transition:transform .2s ease, box-shadow .2s ease;}
+  .drug-acc summary:hover{filter:brightness(1.06);}
+  .sub-banner:hover{filter:brightness(1.05);}
+}
+.th-badge{
+  display:block;width:max-content;margin:3px auto 0;
+  font-size:8.5px;font-weight:700;letter-spacing:.04em;
+  color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;
+}
+
 @media (min-width:720px){
   body{font-size:16px;}
   .features{grid-template-columns:1fr 1fr;max-width:760px;}
   .cat-grid{grid-template-columns:repeat(3,1fr);}
-  .hero{padding:150px 24px 90px;text-align:center;}
-  .hero .points{justify-content:center;}
+  .hero{padding:60px 24px 80px;text-align:center;}
+  .hero-badges{justify-content:center;}
   .hero .btn-line{margin:0 auto;}
+  .hero .cta-microcopy{margin-left:auto;margin-right:auto;}
   .hero-logo{margin-left:auto;margin-right:auto;}
+  .hero>.ph-frame{margin-left:auto;margin-right:auto;text-align:left;}
+  .offer-card{margin-left:auto;margin-right:auto;}
+  .footnotes{margin-left:auto;margin-right:auto;}
+  .check-grid{grid-template-columns:repeat(4,1fr);}
+  .life-grid{grid-template-columns:repeat(4,1fr);}
   .detail-img{aspect-ratio:16/9;}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
-<body class="locked">
+<body>
 
-<!-- SPLASH -->
-<div id="splash">
-  <span class="sub en">MEDICAL × ONLINE</span>
-  <img src="assets/img/logo.png" alt="Re:Design Clinic">
-  <div class="catch serif">続けやすい価格で<br>始める治療。</div>
-  <div class="hint en">SCROLL OR TAP</div>
-</div>
+<div class="compliance-bar">※医師の診察の結果、お薬を処方できない場合があります。すべて自由診療です。</div>
 
 <header class="header">
   <div class="logo"><img src="assets/img/logo.png" alt="Re:Design Clinic"><span class="en">Re:Design Clinic</span></div>
@@ -462,106 +903,46 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 <!-- HERO -->
 <section class="hero" id="top">
   <img class="hero-logo" src="assets/img/logo.png" alt="Re:Design Clinic">
-  <span class="eyebrow en">MEDICAL × ONLINE</span>
-  <h1><em>続けやすい</em>価格で<br>始める治療。</h1>
-  <p class="lead">医療ダイエットからED・AGA・美容内服まで。オンライン診察のうえ、お薬をご自宅のポストへ。誰にも会わずに、あなたのペースで治療をはじめられます。</p>
-  <div class="points">
-    <span>来院不要・スマホで完結</span>
-    <span>医師によるオンライン診察</span>
-    <span>1日あたり66円〜</span>
+  <div class="hero-badges">
+    <span class="hero-badge">スマホで<br>完結<small>オンライン診療</small></span>
+    <span class="hero-badge">週<b>1</b>回<br>の投与<small>※2</small></span>
+    <span class="hero-badge">来院<br>不要<small>全国対応</small></span>
   </div>
+  <div class="goal-badge">3ヶ月で 約<b>−6kg</b>を目指す<sup>※1</sup></div>
+  <h1><em>メディカル</em><br>ダイエット</h1>
+  <span class="subline">GLP-1 オンライン診療</span>
+  <p class="lead">医師の診察のうえ、GIP/GLP-1注射薬をご自宅のポストへ。過剰な食事制限や無理な運動に頼らない、医療の力を借りたダイエットです。</p>
+
+  <div class="offer-card">
+    <div class="oc-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+      <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+      <span class="oc-flag">解約いつでもOK</span>
+    </div>
+    <div class="oc-body">
+      <span class="oc-label">1ヶ月<br>あたり</span>
+      <span class="oc-price">12,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+    </div>
+    <p class="oc-note">※マンジャロ2.5mg 定期プランの月あたり金額。単品購入は13,980円〜。別途送料がかかる場合があります。</p>
+  </div>
+
+  <p class="cta-microcopy">＼ 相談無料・LINEで24時間受付 ／</p>
   <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">
     <span class="ico">LINE</span>
     <span>公式LINEで無料相談する<small>友だち追加はこちら／診察のご予約もLINEから</small></span>
   </a>
-  <p class="note">※ 診察の結果、お薬を処方できない場合があります。</p>
+  <p class="footnotes">※1 参考文献：Jastreboff AM, et al. "Tirzepatide Once Weekly for the Treatment of Obesity." N Engl J Med 2022;387 における同成分製剤の臨床試験結果をもとにした目安です。効果には個人差があり、結果を保証するものではありません。<br>※2 マンジャロ（週1回投与タイプ）の場合。<br>※自由診療（保険適用外）です。医薬品副作用被害救済制度の対象外となる場合があります。</p>
 </section>
 
 <!-- DOCTOR BANNER -->
 <div class="doctor-banner">
-  <img src="" id="doctorBannerImg" alt="医師による診察、スマホ1つで完結。いつでも、どこでも、医師の診察を。">
+  <img src="assets/img/cat_doctor_banner.jpg" loading="lazy" alt="医師による診察、スマホ1つで完結。いつでも、どこでも、医師の診察を。">
 </div>
 
-<!-- CATEGORY GRID -->
-<section class="cat-section">
-  <div class="section-head">
-    <span class="en-label en">MENU</span>
-    <h2>治療メニュー</h2>
-    <div class="rule"></div>
-  </div>
-  <div class="cat-grid">
-    <div class="cat-card has-photo" data-group="p_himan" data-photo="himan">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
-      <h3>肥満症治療<br>(医療ダイエット)</h3>
-      <p>医療の力で理想の体型に</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-    <div class="cat-card has-photo" data-group="p_ed" data-photo="ed">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.4-9.5-9C.7 8 2 4.5 5.5 4c2-.3 3.7.8 4.5 2 .8-1.2 2.5-2.3 4.5-2 3.5.5 4.8 4 3 8-2.5 4.6-9.5 9-9.5 9z"/></svg>
-      <h3>ED/早漏</h3>
-      <p>男性の自信を取り戻す</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-    <div class="cat-card has-photo" data-group="p_biyou" data-photo="biyou">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c2 3 5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 3-6 5-9z"/></svg>
-      <h3>美容内服</h3>
-      <p>スキンケアの新常識</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-    <div class="cat-card has-photo" data-group="p_pill" data-photo="pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="9" width="18" height="6" rx="3"/><path d="M12 9v6"/></svg>
-      <h3>ピル<br>(低用量/アフター)</h3>
-      <p>オンラインで手軽に処方</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-    <div class="cat-card has-photo" data-group="p_aga" data-photo="aga">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 20c0-6 2-9 2-12a4 4 0 0 1 8 0c0 3 2 6 2 12"/><path d="M9 12v6M12 10v8M15 12v6"/></svg>
-      <h3>男性AGA</h3>
-      <p>大切な髪を適切にケアする</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-    <div class="cat-card has-photo" data-group="p_exo" data-photo="exo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="12" cy="17" r="2.2"/><path d="M8.7 8.3 10.5 15.3M15.3 8.3 13.5 15.3M9.2 7h5.6"/></svg>
-      <h3>エクソソーム</h3>
-      <p>次世代のエイジングケア</p>
-      <span class="go">詳しく見る →</span>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-  <div class="section-head">
-    <span class="en-label en">REASON</span>
-    <h2>選ばれる理由</h2>
-    <div class="rule"></div>
-  </div>
-  <div class="features">
-    <div class="feature"><div class="no">I</div><div><h3>通院ゼロ、待ち時間ゼロ</h3><p>予約から診察・決済・処方まですべてスマホで完結。忙しい方でもすき間時間で受診できます。</p></div></div>
-    <div class="feature"><div class="no">II</div><div><h3>明朗な料金設計</h3><p>すべて税込・1日あたりの目安つきで表示。診察後に想定外の費用が発生することはありません。</p></div></div>
-    <div class="feature"><div class="no">III</div><div><h3>プライバシーに配慮</h3><p>ED・AGA・ピルなど人に相談しづらいお悩みも、中身のわからない梱包でご自宅へお届けします。</p></div></div>
-    <div class="feature"><div class="no">IV</div><div><h3>続けやすい価格設計</h3><p>ED治療薬は1錠1,500円〜、AGA内服は1日あたり220円〜。無理なく続けられることを大切に料金を設計しました。</p></div></div>
-  </div>
-</section>
-
-<!-- PRICE -->
-<section class="section price-section" id="price">
-  <div class="section-head">
-    <span class="en-label en">PRICE LIST</span>
-    <h2>診療メニュー・料金</h2>
-    <div class="rule"></div>
-  </div>
-  <div class="tabs" role="tablist">
-    <button class="tab active" data-panel="p-himan">医療ダイエット</button>
-    <button class="tab" data-panel="p-pill">ピル</button>
-    <button class="tab" data-panel="p-biyou">美容内服</button>
-    <button class="tab" data-panel="p-exo">エクソソーム</button>
-    <button class="tab" data-panel="p-ed">ED</button>
-    <button class="tab" data-panel="p-aga">AGA</button>
-  </div>
-  <div id="panels"></div>
-  <a href="#teiki" class="sub-banner" style="max-width:760px;margin:18px auto 0;">
-    <span class="sub-banner-icon">📅</span>
+<!-- SUB BANNER -->
+<section style="padding:36px 20px 0;">
+  <a href="#teiki" class="sub-banner" style="max-width:560px;margin:0 auto;">
+    <span class="sub-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg></span>
     <span class="sub-banner-text">
       <span class="sub-banner-head">定期購入がお得！</span>
       <span class="sub-banner-sub">マンジャロなら1ヶ月あたり最大<b>10,000円</b>お得</span>
@@ -570,10 +951,472 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   </a>
 </section>
 
+<!-- MENU / PLAN BRANCHING -->
+<section class="cat-section">
+  <div class="section-head">
+    <span class="en-label en">MENU</span>
+    <h2>あなたに合った<br>治療メニューを</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="plan-lead">短い期間で効果を実感されたい方に</div>
+  <div class="matrix-wrap" style="margin-bottom:34px;">
+    <div class="plan-catch">＼ タイパ重視の週1回の自己注射 ／</div>
+    <div class="offer-card" style="margin:0 auto;cursor:pointer;" onclick="location.hash='cat-p_himan'">
+      <div class="oc-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+        <span>GIP/GLP-1 注射薬<small>肥満症治療（医療ダイエット）</small></span>
+      </div>
+      <div class="oc-body">
+        <span class="oc-label">1ヶ月<br>あたり</span>
+        <span class="oc-price">12,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+      </div>
+      <p class="oc-note">※定期プラン適用時。詳しくはタップ →</p>
+    </div>
+  </div>
+  <div class="plan-lead" style="background:linear-gradient(120deg,#8B6FA8,#A98FC4);">まずは低用量から試したい方に</div>
+  <div class="matrix-wrap" style="margin-bottom:34px;">
+    <div class="plan-catch">＼ 定期の縛りなし・1ヶ月分だけ ／</div>
+    <div class="offer-card" style="margin:0 auto;cursor:pointer;" onclick="location.hash='product-manjaro-25'">
+      <div class="oc-head" style="background:linear-gradient(120deg,#8B6FA8,#A98FC4);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#8B6FA8;"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+        <span>マンジャロ 2.5mg 単品<small>1ヶ月分（2箱4本）・お試しに</small></span>
+      </div>
+      <div class="oc-body">
+        <span class="oc-label">1ヶ月<br>あたり</span>
+        <span class="oc-price" style="color:#8B6FA8;">13,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+      </div>
+      <p class="oc-note">※単品購入。合わなければ1ヶ月でやめられます。詳しくはタップ →</p>
+    </div>
+  </div>
+  <div class="plan-lead blue">目的から選びたい方はこちら</div>
+  <div class="cat-grid">
+    <div class="cat-card has-photo" data-group="p_himan" data-photo="himan">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+      <h3>肥満症治療<br>(医療ダイエット)</h3>
+      <span class="cat-price">月々12,980円〜</span>
+      <p>医療の力によるダイエット</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+    <div class="cat-card has-photo" data-group="p_ed" data-photo="ed">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.4-9.5-9C.7 8 2 4.5 5.5 4c2-.3 3.7.8 4.5 2 .8-1.2 2.5-2.3 4.5-2 3.5.5 4.8 4 3 8-2.5 4.6-9.5 9-9.5 9z"/></svg>
+      <h3>ED/早漏</h3>
+      <span class="cat-price">1錠1,500円〜</span>
+      <p>男性の自信を取り戻す</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+    <div class="cat-card has-photo" data-group="p_biyou" data-photo="biyou">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c2 3 5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 3-6 5-9z"/></svg>
+      <h3>美容内服</h3>
+      <span class="cat-price">1日あたり66円〜</span>
+      <p>スキンケアの新常識</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+    <div class="cat-card has-photo" data-group="p_pill" data-photo="pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="9" width="18" height="6" rx="3"/><path d="M12 9v6"/></svg>
+      <h3>ピル<br>(低用量/アフター)</h3>
+      <span class="cat-price">月々3,500円〜</span>
+      <p>オンラインで手軽に処方</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+    <div class="cat-card has-photo" data-group="p_aga" data-photo="aga">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 20c0-6 2-9 2-12a4 4 0 0 1 8 0c0 3 2 6 2 12"/><path d="M9 12v6M12 10v8M15 12v6"/></svg>
+      <h3>男性AGA</h3>
+      <span class="cat-price">1日あたり220円〜</span>
+      <p>大切な髪を適切にケアする</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+    <div class="cat-card has-photo" data-group="p_exo" data-photo="exo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="12" cy="17" r="2.2"/><path d="M8.7 8.3 10.5 15.3M15.3 8.3 13.5 15.3M9.2 7h5.6"/></svg>
+      <h3>エクソソーム</h3>
+      <span class="cat-price">37,000円〜</span>
+      <p>次世代のエイジングケア</p>
+      <span class="go">詳しく見る →</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOSE MATRIX -->
+<section class="section price-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FAFCFF"/></svg>
+  <div class="section-head">
+    <span class="en-label en">PRICE</span>
+    <h2>マンジャロ<br><span class="accent">お薬の価格一覧</span></h2>
+    <div class="rule"></div>
+  </div>
+  <div class="matrix-wrap">
+    <div class="matrix-card">
+      <div class="mx-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+        GIP/GLP-1注射薬（マンジャロ）
+      </div>
+      <table class="matrix">
+        <tr><th style="width:64px;background:var(--card);"></th><th>2.5mg<span class="th-badge">開始用量</span></th><th>5mg</th></tr>
+        <tr>
+          <td class="rowlab">定期<br>プラン</td>
+          <td class="big">12,980円<small>1ヶ月あたり</small></td>
+          <td class="big">23,980円<small>1ヶ月あたり</small></td>
+        </tr>
+        <tr>
+          <td class="rowlab">3ヶ月<br>合計</td>
+          <td class="plain">38,940円</td>
+          <td class="plain">71,940円</td>
+        </tr>
+        <tr>
+          <td class="rowlab single">1ヶ月<br>(単品)</td>
+          <td class="plain">13,980円〜</td>
+          <td class="plain">27,980円〜</td>
+        </tr>
+      </table>
+      <table class="matrix" style="border-top:6px solid var(--accent-soft);">
+        <tr><th style="width:64px;background:var(--card);"></th><th>7.5mg</th><th>10mg</th></tr>
+        <tr>
+          <td class="rowlab">定期<br>プラン</td>
+          <td class="big">34,980円<small>1ヶ月あたり</small></td>
+          <td class="big">43,980円<small>1ヶ月あたり</small></td>
+        </tr>
+        <tr>
+          <td class="rowlab">3ヶ月<br>合計</td>
+          <td class="plain">104,940円</td>
+          <td class="plain">131,940円</td>
+        </tr>
+        <tr>
+          <td class="rowlab single">1ヶ月<br>(単品)</td>
+          <td class="plain">41,980円〜</td>
+          <td class="plain">53,980円〜</td>
+        </tr>
+      </table>
+    </div>
+    <p class="matrix-note">※価格はすべて税込です。※定期プランは3ヶ月・6ヶ月更新（1ヶ月あたりの価格は同一）。いつでも解約・休止できます。※2.5mgから開始し、医師の診察のうえ段階的に増量します。※別途送料がかかる場合があります。</p>
+    <div id="accList" style="margin-top:20px;"></div>
+    <a href="#teiki" class="sub-banner" style="max-width:640px;margin:18px auto 0;">
+      <span class="sub-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg></span>
+      <span class="sub-banner-text">
+        <span class="sub-banner-head">定期購入の詳細はこちら</span>
+        <span class="sub-banner-sub">1ヶ月あたり最大<b>10,000円</b>お得・いつでも解約OK</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONVENIENCE -->
+<section class="section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#EEF4FD"/></svg>
+  <div class="section-head">
+    <span class="en-label en">ONLINE</span>
+    <h2>いつでも、好きな時に<br>スマホひとつで</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:640px;margin:0 auto 22px;">
+    <span class="ph-id">P-27 受付フォトバンド<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">ベッドの上でリラックスしながらスマートフォンを眺める20〜30代の日本人女性。柔らかい自然光、白とグレージュの寝具、穏やかな表情。左側に縦書きコピー「いつでも、好きな時に オンラインで予約ができます」と丸バッジ「24時間受付」を重ねる余白を残す。</p>
+  </div>
+  <div class="check-grid">
+    <div class="check-card">
+      <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <h3><b>24時間</b>LINE受付</h3>
+      <p>ご相談・ご予約はいつでもLINEから</p>
+    </div>
+    <div class="check-card">
+      <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+      <h3>最短<b>翌日</b>お届け</h3>
+      <p>ご自宅のポストへお届けします※</p>
+    </div>
+    <div class="check-card">
+      <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>
+      <h3>中身のわからない<br><b>梱包</b>でお届け</h3>
+      <p>プライバシーに配慮してお届け</p>
+    </div>
+    <div class="check-card">
+      <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+      <h3>はじめてでも<br><b>話しやすい</b></h3>
+      <p>オンラインだから相談しやすい</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:9.5px;color:var(--muted);margin-top:12px;">※診察・決済の時間やお届けエリアにより異なります。</p>
+</section>
+
+<!-- DOCTOR PROMISE -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="en-label en">PROMISE</span>
+    <h2>安心できる<br>医師によるサポート体制</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="promise-box">
+    <div class="pr-head">Re:Design Clinic のお約束</div>
+    <ul>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>医学的に必要がないと医師が判断した方には、<b>お薬の処方はいたしません。</b></span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>体調・既往歴を確認のうえ、<b>一人ひとりに寄り添った処方</b>を心がけています。</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section" style="padding-top:0;">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="ring"><b>無料</b><small>そうだん</small></div>
+      <p>LINEでの相談は<br>何度でも無料</p>
+    </div>
+    <div class="stat-card">
+      <div class="ring"><b>10秒</b><small>とうろく</small></div>
+      <p>友だち追加は<br>約10秒で完了</p>
+    </div>
+    <div class="stat-card">
+      <div class="ring"><b>0回</b><small>らいいん</small></div>
+      <p>診察から処方まで<br>来院は不要</p>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE RESERVATION EXPLAINER -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="glp-hero" style="margin:0;"><span class="tag" style="border-color:var(--accent);color:var(--accent-deep);">24時間受付中</span></span>
+    <h2 style="margin-top:10px;"><span class="accent">オンライン予約</span></h2>
+    <div class="rule"></div>
+  </div>
+  <p style="max-width:34em;margin:0 auto 22px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:2.1;">初診の方でも、<b style="color:var(--accent-deep);">オンラインで診察し、お薬をご自宅までお届け</b>いたします。いつでもおうちで、好きな時に、気軽にご予約いただけます。</p>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:560px;margin:0 auto 22px;">
+    <span class="ph-id">P-28 予約イラスト<span class="ph-size">800×600px</span></span>
+    <p class="ph-prompt">フラットなラインイラスト。大きなスマートフォンの画面から白衣の女性スタッフが笑顔で手を振り、周囲に問診票・カプセル薬・配送ボックスのアイコンが吹き出しで浮かぶ。淡いピンクとブルーグレーの2色使い、余白広め、医療系LPらしい優しいタッチ。</p>
+  </div>
+  <p style="text-align:center;font-family:'Shippori Mincho',serif;font-size:13.5px;color:var(--ink);letter-spacing:.06em;line-height:2.1;">Re:Design Clinicは現在、おかげさまで<br>大変ご好評をいただいております。</p>
+</section>
+
+<!-- ATTENTION -->
+<section class="section" style="padding-top:0;">
+  <div class="attention-box">
+    <span class="att-label">ATTENTION</span>
+    <p>診察のご予約は先着順です。<br>まずはLINEで<b>空き状況のご確認</b>をお済ませください。</p>
+  </div>
+  <div style="max-width:440px;margin:26px auto 0;">
+    <p class="cta-microcopy">＼ 相談無料・LINEで24時間受付 ／</p>
+    <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">
+      <span class="ico">LINE</span>
+      <span>友だち追加して相談する<small>登録は10秒・相談は無料</small></span>
+    </a>
+  </div>
+</section>
+
+<!-- OFFER REPEAT -->
+<section class="section" style="background:var(--accent-soft);">
+  <div style="text-align:center;"><div class="goal-badge">3ヶ月で 約<b>−6kg</b>を目指す<sup>※1</sup></div></div>
+  <div class="offer-card" style="margin:0 auto 20px;">
+    <div class="oc-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+      <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+      <span class="oc-flag">解約いつでもOK</span>
+    </div>
+    <div class="oc-body">
+      <span class="oc-label">1ヶ月<br>あたり</span>
+      <span class="oc-price">12,980<span class="yen">円〜</span><span class="tax">(税込)</span></span>
+    </div>
+    <p class="oc-note">※マンジャロ2.5mg 定期プランの月あたり金額。単品購入は13,980円〜。別途送料がかかる場合があります。</p>
+  </div>
+  <div style="max-width:440px;margin:0 auto;">
+    <p class="cta-microcopy">＼ 相談無料・LINEで24時間受付 ／</p>
+    <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">
+      <span class="ico">LINE</span>
+      <span>公式LINEで無料相談する<small>友だち追加はこちら／診察のご予約もLINEから</small></span>
+    </a>
+  </div>
+  <p class="footnotes" style="margin:14px auto 0;">※1 参考文献：Jastreboff AM, et al. "Tirzepatide Once Weekly for the Treatment of Obesity." N Engl J Med 2022;387 における同成分製剤の臨床試験結果をもとにした目安です。効果には個人差があり、結果を保証するものではありません。※自由診療（保険適用外）です。</p>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FBE9F0"/></svg>
+  <h2 class="problem-title">頑張っても続かなかった、<br>そのダイエットには<br><mark>理由があります</mark></h2>
+  <div class="bubble-grid">
+    <div class="bubble">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9v6M8 6v12M16 6v12M20 9v6M8 12h8"/></svg>
+      <p>ハードな運動<small>時間も体力も続かない…</small></p>
+    </div>
+    <div class="bubble">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3v5M9 3v5M12 3v5M9 8v13"/><path d="M17 3c-1.6 1.8-2.4 3.8-2.4 6 0 1.6.9 2.6 2.4 3v9"/></svg>
+      <p>厳しすぎる食事制限<small>我慢の反動でリバウンド…</small></p>
+    </div>
+    <div class="bubble">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="3" width="6" height="4" rx="1"/><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M10 14h4"/></svg>
+      <p>市販サプリ頼み<small>飲んでも変化を感じない…</small></p>
+    </div>
+    <div class="bubble">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l6 6 4-4 7 7"/><path d="M20 16h-5M20 16v-5"/></svg>
+      <p>結果が出ない<small>何度挑戦しても同じ…</small></p>
+    </div>
+  </div>
+  <div class="pivot-label">そこで</div>
+</section>
+
+<!-- MECHANISM -->
+<section class="mech-section curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#55657D"/></svg>
+  <h2 class="mech-catch">根拠のある医療の力で<br><mark>続けられるダイエット</mark>を</h2>
+  <div class="glp-hero">
+    <span class="tag">元々人が持つホルモン</span>
+    <div class="big-word en">GLP-1</div>
+    <p>に着目した治療を行います</p>
+  </div>
+  <div class="glp-box">
+    <p class="gb-title">「GLP-1」とは<br><u>私たちの体内にもともと存在しているホルモンの一種</u>です。</p>
+    <ul>
+      <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>過剰な食欲</b>をおだやかに抑える</span></li>
+      <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>血糖値の急上昇</b>を抑える</span></li>
+      <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>内臓脂肪の燃焼</b>をサポート</span></li>
+    </ul>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <p class="cc-cond">食欲旺盛<br>血糖値が上がりやすい</p>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="7" r="4"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg>
+      <span class="cc-result">太りやすい</span>
+    </div>
+    <div class="compare-card good">
+      <p class="cc-cond">GLP-1の<br>作用が強い</p>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="7" r="4"/><path d="M6 21c0-4 2.5-7 6-7s6 3 6 7"/><circle cx="18.5" cy="5.5" r="2.5" stroke="none" fill="currentColor" opacity=".25"/></svg>
+      <span class="cc-result">痩せやすい</span>
+    </div>
+  </div>
+  <p class="mech-conclusion">だから、GLP-1の働きをするお薬で<br><b>太りにくい状態づくり</b>が期待できます。</p>
+</section>
+
+<!-- PRODUCT FEATURE -->
+<section class="section">
+  <div class="pf-card">
+    <div class="pf-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2l4 4-3 3-4-4z"/><path d="M15 5L5 15l-1 5 5-1L19 9"/></svg>
+      <span>GIP/GLP-1 注射薬<small>マンジャロ（チルゼパチド）</small></span>
+    </div>
+    <div class="pf-body">
+      <p class="pf-catch"><u>週に1回の自己注射</u>で</p>
+      <p class="pf-sub">3ヶ月で約−6kg、6ヶ月で約−11kgを目指せる※</p>
+      <div class="pf-graph">
+        <svg viewBox="0 0 340 190" role="img" aria-label="体重変化の目安：開始から3ヶ月で約マイナス6kg、6ヶ月で約マイナス11kg">
+          <line x1="40" y1="20" x2="40" y2="150" stroke="#C9D6E8" stroke-width="1"/>
+          <line x1="40" y1="150" x2="320" y2="150" stroke="#C9D6E8" stroke-width="1"/>
+          <text x="10" y="30" font-size="10" fill="#94A0B0">0kg</text>
+          <text x="6" y="92" font-size="10" fill="#94A0B0">-6kg</text>
+          <text x="2" y="145" font-size="10" fill="#94A0B0">-11kg</text>
+          <text x="36" y="168" font-size="10" fill="#94A0B0">開始</text>
+          <text x="160" y="168" font-size="10" fill="#94A0B0">3ヶ月</text>
+          <text x="290" y="168" font-size="10" fill="#94A0B0">6ヶ月</text>
+          <polyline points="40,26 170,88 310,140" fill="none" stroke="#D96C93" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="40" cy="26" r="5" fill="#F2B233"/>
+          <circle cx="170" cy="88" r="5" fill="#D96C93"/>
+          <circle cx="310" cy="140" r="5" fill="#B94A6E"/>
+          <rect x="140" y="58" width="60" height="20" rx="10" fill="#D96C93"/>
+          <text x="170" y="72" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">−6kg</text>
+          <rect x="272" y="110" width="64" height="20" rx="10" fill="#B94A6E"/>
+          <text x="304" y="124" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">−11kg</text>
+        </svg>
+      </div>
+      <p class="pf-graph-note">※参考文献（Jastreboff AM, et al. N Engl J Med 2022;387）における同成分製剤の臨床試験結果をもとにしたイメージです。体格・用量により異なり、効果には個人差があります。</p>
+      <div class="point-box">
+        <span class="pt-label">Point</span>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg><span>週1回の注射で良いため、お薬の打ち忘れリスクが少ない</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg><span>注射針は採血用より細いタイプで、痛みを感じにくい設計</span></li>
+        </ul>
+      </div>
+      <p class="pf-note">自己注射は痛そう…というイメージがありますが、マンジャロは<b>針が見えない構造の注入器</b>で、ボタンを押すだけ。初めての方でも約1分で完了します。</p>
+      <div class="easy-band">
+        <span class="easy-chip">週1回</span>
+        <span class="easy-chip">約1分で<br>完了</span>
+        <span class="eb-label">初めての方でも<br>カンタン！</span>
+      </div>
+      <p class="cta-microcopy">＼ 相談無料・LINEで24時間受付 ／</p>
+      <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener" style="margin:0 auto;">
+        <span class="ico">LINE</span>
+        <span>この治療について相談する<small>医師の診察のうえ処方可否を判断します</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY LIFE BAND -->
+<section class="section" style="padding-top:0;">
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:640px;margin:0 auto;">
+    <span class="ph-id">P-29 いつもの生活フォト<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">明るいカフェで友人と楽しそうに談笑する20〜30代の日本人女性2人。自然光、柔らかいボケ、幸福感のあるライフスタイル写真。右側に縦書きコピー「あとは、いつもの生活を送るだけ」を重ねる余白を残す。</p>
+  </div>
+</section>
+
+<!-- CONSULT CLOSING -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="en-label en">SUPPORT</span>
+    <h2>迷っている方も<br>お気軽にご相談ください</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="ph-frame" style="aspect-ratio:4/3;max-width:560px;margin:0 auto 22px;">
+    <span class="ph-id">P-30 相談クロージング写真<span class="ph-size">960×720px</span></span>
+    <p class="ph-prompt">明るい診察室の窓辺で、イヤホンをつけてノートPCの画面に微笑みかける白衣の日本人女性医師（30代）。清潔感と親しみやすさ、柔らかい自然光。左上に見出し「迷っている方もお気軽にご相談ください」を重ねる余白を残す。</p>
+  </div>
+  <div class="promise-box">
+    <div class="pr-head">Re:Design Clinic のお約束</div>
+    <ul>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>医学的に必要がないと医師が判断した方には、<b>お薬の処方はいたしません。</b></span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <span>体調・既往歴を確認のうえ、<b>一人ひとりに寄り添った処方</b>を心がけています。</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- EMOTION BAND -->
+<section class="emotion-band curved">
+  <svg class="curve-top" viewBox="0 0 390 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h390v6c-96 38-294 38-390 0z" fill="#FAFCFF"/></svg>
+  <h2>変わりたいと思った、あなたへ。<br>もう<b>一人で悩まなくて大丈夫</b>です。</h2>
+  <p>何度も挑戦しては続かなかったダイエットも、体型だけでなく健康が気になり始めた今も。医師と一緒なら、あなたに合った変わり方がきっと見つかります。</p>
+</section>
+
+<!-- LIFE CHANGE -->
+<section class="section" style="padding-top:60px;">
+  <div class="section-head">
+    <span class="en-label en">FUTURE</span>
+    <h2>日常が変わる<br>自分がだんだん好きになる</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="life-grid">
+    <div class="life-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 3v7c0 1.5 1 2 2 2s2-.5 2-2V3M6 12v9"/><path d="M15 3c-2 0-3 2.5-3 5s1 4 3 4v9"/><path d="M18 3v18"/></svg>
+      <h3>安心して<br>食事が楽しめる</h3>
+    </div>
+    <div class="life-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4l3-2 5 3-2 4-2-1v12H8V8L6 9 4 5l5-3 3 2z"/></svg>
+      <h3>変化に合わせて<br>似合う服も広がる</h3>
+    </div>
+    <div class="life-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/></svg>
+      <h3>体が軽くなり<br>毎日が動きやすい</h3>
+    </div>
+    <div class="life-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><path d="M17 3l1.5 1.5M19 7h2"/></svg>
+      <h3>「最近いいね」と<br>言われる私に</h3>
+    </div>
+  </div>
+</section>
+
 <!-- FLOW -->
-<section class="section" id="flow">
+<section class="section" id="flow" style="padding-top:0;">
   <div class="section-head"><span class="en-label en">FLOW</span><h2>ご利用の流れ</h2><div class="rule"></div></div>
-  <img src="assets/img/flow.jpg" loading="lazy" alt="ご利用の流れ：LINEで友だち追加(約1分)、問診に回答(約5分)、医師のオンライン診察(約10分)、ご自宅にお届け(最短翌日)" style="width:100%;border-radius:14px;display:block;">
+  <img src="assets/img/flow.jpg" loading="lazy" style="max-width:640px;margin:0 auto;border-radius:14px;" alt="ご利用の流れ：LINEで友だち追加(約1分)、問診に回答(約5分)、医師のオンライン診察(約10分)、ご自宅にお届け(最短翌日)">
 </section>
 
 <!-- FAQ -->
@@ -582,18 +1425,49 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
   <div class="faq">
     <details><summary>本当に来院しなくていいのですか？</summary><div class="a">はい。問診から診察・処方・配送まですべてオンラインで完結します。症状によっては対面での受診をおすすめする場合があります。</div></details>
     <details><summary>診察料はかかりますか？</summary><div class="a">料金の詳細は公式LINEにてご案内しています。表示価格のほかに送料等がかかる場合があります。</div></details>
+    <details><summary>マンジャロの定期プランはいつでも解約できますか？</summary><div class="a">はい。次回配送日の前までにご連絡いただければ、いつでも解約・休止が可能です。違約金などはありません。</div></details>
+    <details><summary>注射が初めてで不安です。</summary><div class="a">マンジャロは針が見えない構造の注入器で、ボタンを押すだけで投与できます。使い方は診察時に丁寧にご案内しますのでご安心ください。</div></details>
     <details><summary>家族に知られたくないのですが…</summary><div class="a">お薬は中身がわからない梱包でお届けします。配送方法のご相談もLINEで承ります。</div></details>
-    <details><summary>副作用が出たらどうすればいいですか？</summary><div class="a">まずは服用を中止し、公式LINEまたは医療機関にご相談ください。症状が重い場合は速やかに受診してください。</div></details>
+    <details><summary>副作用が出たらどうすればいいですか？</summary><div class="a">まずは使用を中止し、公式LINEまたは医療機関にご相談ください。症状が重い場合は速やかに受診してください。</div></details>
+    <details><summary>支払い方法を教えてください。</summary><div class="a">定期プランは初回お申し込み時に一括でのお支払いとなります（3ヶ月分・6ヶ月分をまとめてご請求）。詳細はLINEにてご案内します。</div></details>
+    <details><summary>保険は使えますか？</summary><div class="a">本ページに記載の治療はすべて自由診療のため、保険適用外です。価格はすべて税込で表示しています。</div></details>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-band">
   <h2>まずは、LINEで<br>無料相談から。</h2>
-  <p>「自分に合う薬がわからない」でも大丈夫。<br>医師とスタッフが丁寧にご案内します。</p>
+  <p>「自分に合う治療がわからない」でも大丈夫。<br>医師とスタッフが丁寧にご案内します。</p>
   <a class="btn-line" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">
     <span class="ico">LINE</span><span>友だち追加して相談する<small>登録は10秒・相談は無料</small></span>
   </a>
+</section>
+
+<!-- DRUG NOTICES -->
+<section class="notice-section">
+  <div class="section-head"><span class="en-label en">PRECAUTIONS</span><h2>当院で取り扱うお薬の<br>重要事項</h2><div class="rule"></div></div>
+  <div class="notice-wrap">
+    <div class="notice-block">
+      <h3>GIP/GLP-1受容体作動薬（マンジャロ／チルゼパチド注射薬）</h3>
+      <table class="notice">
+        <tr><th>未承認医薬品等</th><td>マンジャロは国内では2型糖尿病治療薬として承認されていますが、肥満治療（ダイエット）目的での処方は承認外（適応外使用）です。</td></tr>
+        <tr><th>入手経路等</th><td>当院では国内正規流通品（医薬品卸）から仕入れています。</td></tr>
+        <tr><th>国内の承認医薬品等の有無</th><td>同一成分のお薬は2型糖尿病治療薬として国内承認されています。肥満症治療薬としての同成分の国内承認はありません。</td></tr>
+        <tr><th>諸外国の安全性情報・副作用</th><td>米国では同成分製剤が肥満症治療薬として承認されています。主な副作用として、吐き気・嘔吐・下痢・便秘・食欲不振・注射部位反応など、まれに急性膵炎・低血糖が報告されています。</td></tr>
+        <tr><th>医薬品副作用被害救済制度</th><td>適応外使用のため、万が一重篤な副作用が生じた場合、医薬品副作用被害救済制度の対象外となります。</td></tr>
+      </table>
+    </div>
+    <div class="notice-block">
+      <h3>ヒト幹細胞培養上清液（セクレトーム点鼻）</h3>
+      <table class="notice">
+        <tr><th>未承認医薬品等</th><td>幹細胞培養上清液は、医薬品として国内で承認されていません。</td></tr>
+        <tr><th>入手経路等</th><td>当院では国内の製造事業者から仕入れています。</td></tr>
+        <tr><th>国内の承認医薬品等の有無</th><td>同一の成分・効能で承認された国内医薬品はありません。</td></tr>
+        <tr><th>諸外国の安全性情報・副作用</th><td>医薬品として承認された国はありません。鼻腔の刺激感・違和感などが報告されています。</td></tr>
+        <tr><th>医薬品副作用被害救済制度</th><td>未承認のため、万が一重篤な副作用が生じた場合、医薬品副作用被害救済制度の対象外となります。</td></tr>
+      </table>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">
@@ -635,7 +1509,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <span>商品詳細</span>
   </div>
   <div class="detail-body">
-    <img class="detail-img" id="detailImg" src="" alt="">
+    <img class="detail-img" id="detailImg" alt="">
     <div class="detail-content">
       <span class="cat-tag" id="detailCat"></span>
       <h1 class="serif" id="detailName"></h1>
@@ -650,7 +1524,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
       </dl>
       <div id="detailSubBanner" style="display:none;margin-top:16px;">
         <a href="#teiki" class="sub-banner">
-          <span class="sub-banner-icon">📅</span>
+          <span class="sub-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg></span>
           <span class="sub-banner-text">
             <span class="sub-banner-head">定期購入がお得！</span>
             <span class="sub-banner-sub">1ヶ月あたり<b id="detailSubSave">1,000円</b>お得</span>
@@ -672,7 +1546,7 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
     <span>定期購入について</span>
   </div>
   <div class="cat-banner">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg>
     <h1 class="serif">定期購入がお得です</h1>
     <p>マンジャロは定期購入にすると、通常購入より毎月お得に続けられます。いつでも解約・休止OK。</p>
   </div>
@@ -716,15 +1590,10 @@ dl.detail-dl dd.warn{color:#8A5A3E;}
 </div>
 
 <script>
-const CAT_IMG = {"exo": "assets/img/cat_exo.jpg", "himan": "assets/img/cat_himan.jpg", "ed": "assets/img/cat_ed.jpg", "biyou": "assets/img/cat_biyou.jpg", "pill": "assets/img/cat_pill.jpg", "aga": "assets/img/cat_aga.jpg", "doctor_banner": "assets/img/cat_doctor_banner.jpg"};
-const dbImg = document.getElementById("doctorBannerImg");
-if (dbImg && CAT_IMG.doctor_banner) { dbImg.src = CAT_IMG.doctor_banner; }
+// カテゴリカードの背景写真
 document.querySelectorAll(".cat-card[data-photo]").forEach(function(el){
-  var key = el.getAttribute("data-photo");
-  if (CAT_IMG[key]) { el.style.backgroundImage = "url(" + CAT_IMG[key] + ")"; }
+  el.style.backgroundImage = "url(assets/img/cat_" + el.getAttribute("data-photo") + ".jpg)";
 });
-
-const IMG = {"cynal": "assets/img/cynal.jpg", "secretome_white": "assets/img/secretome_white.jpg", "droethi": "assets/img/droethi.jpg", "tadalafil_10": "assets/img/tadalafil_10.jpg", "dienogest": "assets/img/dienogest.jpg", "frocin": "assets/img/frocin.jpg", "vardenafil_20": "assets/img/vardenafil_20.jpg", "manjaro_75": "assets/img/manjaro_75.jpg", "tadalafil_20": "assets/img/tadalafil_20.jpg", "dutasteride": "assets/img/dutasteride.jpg", "manjaro_5": "assets/img/manjaro_5.jpg", "manjaro_25": "assets/img/manjaro_25.jpg", "secretome_yellow": "assets/img/secretome_yellow.jpg", "vardenafil_general": "assets/img/vardenafil_general.jpg", "yubera": "assets/img/yubera.jpg", "manjaro_10": "assets/img/manjaro_10.jpg", "transamin": "assets/img/transamin.jpg"};
 
 const groups = {
   p_himan: {label:'肥満', note:'週1回の自己注射タイプ。医師の診察のうえ、体調に合わせて用量を調整します。', items:[
@@ -800,13 +1669,12 @@ const groups = {
   ]},
 };
 
-const panelsEl = document.getElementById('panels');
 function buildRowsHtml(g){
   return g.items.map(it => `
     <tr data-id="${it.id}">
       <td colspan="2" style="padding:0;border:none;">
         <div class="drug-head">
-          <img src="${IMG[it.img]}" alt="${it.name}" loading="lazy">
+          <img src="assets/img/${it.img}.jpg" alt="${it.name}" loading="lazy">
           <h3>${it.name}<small>${it.spec}</small></h3>
           <span class="chev">詳細 ›</span>
         </div>
@@ -817,15 +1685,6 @@ function buildRowsHtml(g){
       <td class="p">${it.price}${it.per?`<br><span class="per">${it.per}</span>`:''}</td>
     </tr>`).join('');
 }
-Object.keys(groups).forEach((key, idx) => {
-  const g = groups[key];
-  const panelId = key.replace('_','-');
-  const div = document.createElement('div');
-  div.className = 'panel' + (idx===0 ? ' active':'');
-  div.id = panelId;
-  div.innerHTML = `<p class="cat-note">${g.note}</p><div class="drug"><table class="price">${buildRowsHtml(g)}</table></div>`;
-  panelsEl.appendChild(div);
-});
 
 // icon markup reused from the category grid (kept in one place to avoid duplication)
 const catIcons = {
@@ -842,22 +1701,25 @@ const allItems = {};
 Object.values(groups).forEach(g => g.items.forEach(it => allItems[it.id] = {...it, cat:g.label}));
 const allManjaroIds = groups.p_himan.items.map(it => it.id);
 
-// tab switching (still works when scrolling the home price section directly)
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById(t.dataset.panel).classList.add('active');
-  });
-});
+// 価格一覧下のアコーディオン（マンジャロ以外のカテゴリ）
+const accList = document.getElementById('accList');
+if(accList){
+  const accLabels = {p_pill:'ピル（低用量/アフター）', p_biyou:'美容内服', p_exo:'エクソソーム', p_ed:'ED治療薬', p_aga:'AGA治療薬'};
+  accList.innerHTML = ['p_pill','p_biyou','p_exo','p_ed','p_aga'].map(k=>{
+    const g = groups[k];
+    return `<details class="drug-acc">
+      <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${catIcons[k]}</svg>${accLabels[k]}<span class="chev">▼</span></summary>
+      <div class="acc-body"><p class="acc-note">${g.note}</p><div class="drug" style="margin-bottom:0;"><table class="price">${buildRowsHtml(g)}</table></div></div>
+    </details>`;
+  }).join('');
+}
 
 // category grid -> navigate to its own page (#cat-xxxx)
 document.querySelectorAll('.cat-card').forEach(c=>{
   c.addEventListener('click', ()=>{ location.hash = 'cat-' + c.dataset.group; });
 });
 
-// row click (works both on the home price table and inside a category page) -> product detail
+// row click (works inside a category page) -> product detail
 document.addEventListener('click', (e)=>{
   const tr = e.target.closest('tr[data-id]');
   if(!tr) return;
@@ -871,7 +1733,7 @@ const subscriptionEl = document.getElementById('subscriptionView');
 function renderDetail(id){
   const it = allItems[id];
   if(!it) return false;
-  document.getElementById('detailImg').src = IMG[it.img];
+  document.getElementById('detailImg').src = `assets/img/${it.img}.jpg`;
   document.getElementById('detailImg').alt = it.name;
   document.getElementById('detailCat').textContent = it.cat;
   document.getElementById('detailName').textContent = it.name;
@@ -931,7 +1793,7 @@ function renderCategory(key){
   document.getElementById('categoryTitle').textContent = g.label;
   document.getElementById('categoryNote').textContent = g.note;
   const subBannerHtml = key === 'p_himan'
-    ? `<a href="#teiki" class="sub-banner" style="margin-bottom:14px;"><span class="sub-banner-icon">📅</span><span class="sub-banner-text"><span class="sub-banner-head">定期購入がお得！</span><span class="sub-banner-sub">1ヶ月あたり最大<b>10,000円</b>お得</span></span><span class="arrow">→</span></a>`
+    ? `<a href="#teiki" class="sub-banner" style="margin-bottom:14px;"><span class="sub-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2v4M7 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M9 15l2 2 4-4"/></svg></span><span class="sub-banner-text"><span class="sub-banner-head">定期購入がお得！</span><span class="sub-banner-sub">1ヶ月あたり最大<b>10,000円</b>お得</span></span><span class="arrow">→</span></a>`
     : '';
   document.getElementById('categoryList').innerHTML = `${subBannerHtml}<div class="drug"><table class="price">${buildRowsHtml(g)}</table></div>`;
   return true;
@@ -982,26 +1844,17 @@ const heroEl = document.querySelector('.hero');
 const sticky = document.getElementById('stickyCta');
 new IntersectionObserver(e=>{ sticky.classList.toggle('show', !e[0].isIntersecting); }, {threshold:0}).observe(heroEl);
 
-// SPLASH: hybrid auto/tap dismiss
-const splash = document.getElementById('splash');
-let dismissed = false;
-function dismissSplash(){
-  if(dismissed) return;
-  dismissed = true;
-  splash.classList.add('hide');
-  document.body.classList.remove('locked');
-  window.removeEventListener('wheel', onUserAction);
-  window.removeEventListener('touchmove', onUserAction);
-  window.removeEventListener('keydown', onUserAction);
-  splash.removeEventListener('click', onUserAction);
-  setTimeout(()=>{ splash.style.display='none'; }, 750);
+// scroll reveal (reduced-motion環境では付与しない)
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const ro = new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('in'); ro.unobserve(en.target); }
+  }), {threshold:.1, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.section > *, .cat-section > *, .problem-section > *, .mech-section > *, .emotion-band > *, .notice-section > *, .cta-band > *').forEach(el=>{
+    if(el.classList.contains('curve-top')) return;
+    el.classList.add('reveal');
+    ro.observe(el);
+  });
 }
-function onUserAction(){ dismissSplash(); }
-window.addEventListener('wheel', onUserAction, {passive:true});
-window.addEventListener('touchmove', onUserAction, {passive:true});
-window.addEventListener('keydown', onUserAction);
-splash.addEventListener('click', onUserAction);
-setTimeout(dismissSplash, 2800);
 </script>
 </body>
 </html>
