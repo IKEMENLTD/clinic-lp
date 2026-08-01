@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Re:Design Clinic｜GLP-1注射 オンライン診療（1px準拠スケルトン）</title>
+<meta name="description" content="参照LPの実測ジオメトリに1px単位で準拠したスケルトン版。画像領域は同寸フレーム、ウィジェット・FAQは実測組版。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/*
+  参照LP実測ジオメトリ（2026-08-01計測 @390px viewport）:
+  - 画像領域は全てフルブリード390px幅。各高さは下記フレームのheightに1px単位で反映
+  - 購入ウィジェット: コンテンツ幅370px（ガター10px）/ 基本文字17px/27.2
+  - select: h34 / fs12 / pad 0 24 0 16 / 角丸50px
+  - CTAボタン: w370 / h57 / fs15 / fw600 / pad 17px 24px / 角丸100px
+  - FAQ行: 幅342px（左右24pxガター）/ 本文17px/27.2
+  - ページ全高 8,614px（テキスト量の差で±数十pxは許容）
+*/
+:root{
+  --ink:#1F2A33;
+  --muted:#8A97A3;
+  --teal:#2E7E8F;
+  --red:#D0342C;
+  --line:#06C755;
+  --line-deep:#05A648;
+  --frame-bd:#9FBDD8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{background:#EEF2F5;}
+body{
+  font-family:'Noto Sans JP',sans-serif;color:var(--ink);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+main{max-width:390px;margin:0 auto;background:#fff;overflow:hidden;}
+img{max-width:100%;display:block;}
+
+/* 画像フレーム（参照の画像領域と同寸） */
+.frame{
+  width:390px;max-width:100%;
+  border:2px dashed var(--frame-bd);
+  background:repeating-linear-gradient(45deg,#F2F8FE,#F2F8FE 12px,#E9F3FC 12px,#E9F3FC 24px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:16px;gap:7px;color:#54677A;overflow:hidden;
+}
+.frame .f-id{
+  font-size:11px;font-weight:800;color:#2F6EA6;letter-spacing:.08em;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+.frame .f-id::before{
+  content:"IMG";background:#2F6EA6;color:#fff;font-size:8.5px;
+  padding:1px 7px;border-radius:4px;letter-spacing:.1em;
+}
+.frame .f-size{font-size:9px;font-weight:600;color:var(--muted);}
+.frame .f-prompt{font-size:10px;line-height:1.7;user-select:all;}
+
+/* 購入ウィジェット（実測組版） */
+.widget{width:370px;margin:20px auto;}
+.widget .w-title{font-size:17px;font-weight:700;line-height:1.6;}
+.widget .w-strike{font-size:13px;color:var(--muted);text-decoration:line-through;margin-top:6px;}
+.widget .w-price{font-size:26px;font-weight:900;color:var(--red);line-height:1.3;}
+.widget .w-fact{font-size:13px;color:var(--ink);margin-top:2px;}
+.widget label{display:block;font-size:17px;font-weight:400;margin:16px 0 6px;}
+.widget select{
+  width:370px;height:34px;font-size:12px;padding:0 24px 0 16px;border-radius:50px;
+  border:1px solid #C4CDD5;background:#fff;color:var(--ink);font-family:inherit;appearance:auto;
+}
+.widget .w-planlabel{font-size:17px;margin:16px 0 6px;}
+.plan-card{
+  width:370px;border:2px solid var(--ink);border-radius:10px;padding:16px;
+  font-size:13px;line-height:1.7;position:relative;
+}
+.plan-card .pc-price{position:absolute;top:14px;right:16px;font-size:15px;font-weight:700;}
+.plan-card .pc-name{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.plan-card .pc-name::before{
+  content:"";width:14px;height:14px;border-radius:50%;border:4px solid var(--ink);flex:none;
+}
+.plan-card .pc-rows{margin:8px 0;}
+.plan-card .pc-check{color:#1D7A38;font-weight:600;}
+.micro-red{
+  width:390px;margin:16px 0 0;text-align:center;
+  font-size:15px;font-weight:700;color:var(--red);letter-spacing:.02em;
+}
+.micro-red::before{content:"＼";}
+.micro-red::after{content:"／";}
+.cta{
+  display:flex;align-items:center;justify-content:center;
+  width:370px;height:57px;margin:8px auto 0;
+  padding:17px 24px;border-radius:100px;
+  background:linear-gradient(180deg,var(--line),var(--line-deep));
+  color:#fff;font-size:15px;font-weight:600;letter-spacing:.02em;
+  text-decoration:none;
+}
+.cta-note{width:370px;margin:8px auto 0;font-size:10.5px;color:var(--ink);text-align:center;}
+.cta-note b{color:var(--red);}
+
+/* 商品ギャラリー（メイン390×390＋サムネ67×67） */
+.gallery-main{margin-top:15px;}
+.thumbs{display:flex;gap:8px;padding:12px 10px;overflow-x:auto;scrollbar-width:none;}
+.thumbs::-webkit-scrollbar{display:none;}
+.thumb{
+  flex:none;width:67px;height:67px;border:1.5px dashed var(--frame-bd);border-radius:6px;
+  background:#F2F8FE;display:grid;place-items:center;
+  font-size:8px;font-weight:800;color:#2F6EA6;
+}
+
+/* FAQ（実測組版: 行幅342 / 本文17px） */
+.faq-sec{background:var(--teal);padding:28px 0 36px;}
+.faq-sec h2{color:#fff;text-align:center;font-size:22px;font-weight:700;letter-spacing:.06em;margin-bottom:18px;}
+.faq{width:342px;margin:0 auto;display:grid;gap:10px;}
+.faq details{background:#fff;border-radius:8px;overflow:hidden;}
+.faq summary{
+  list-style:none;cursor:pointer;padding:12px 14px;
+  font-size:15px;font-weight:700;color:var(--teal);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"⌄";flex:none;color:var(--teal);}
+.faq details[open] summary::after{content:"⌃";}
+.faq .a{padding:0 14px 14px;font-size:17px;line-height:1.6;color:var(--ink);}
+
+.footer{padding:24px 10px 40px;font-size:10.5px;line-height:1.9;color:var(--muted);}
+.footer ul{list-style:none;display:grid;gap:6px;}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<main>
+
+<!-- F-01 y=0 -->
+<div class="frame" style="height:585px;">
+  <span class="f-id">F-01 ヒーロー<span class="f-size">390×585px</span></span>
+  <p class="f-prompt">縦長のヒーローバナー画像。上部に「GLP-1注射 オンライン診療」の明朝体見出しとクリニックロゴ、右側に透明感のある20代日本人女性のビューティーポートレート（黒髪ロング・白キャミソール・淡い水色の光）。中央に吹き出しで「GLP-1は高いから、と諦めていませんか？」。下部に「続けやすい価格で」の帯、用量別価格2行（2.5mg 12,980円〜／5.0mg 23,980円〜 ※定期・1ヶ月あたり・税込）、丸バッジ3つ「相談料0円」「解約金0円」「来院0回」。水色×白の清潔な美容クリニック広告。</p>
+</div>
+
+<!-- F-02 y=585 -->
+<div class="frame" style="height:390px;">
+  <span class="f-id">F-02 需要告知<span class="f-size">390×390px</span></span>
+  <p class="f-prompt">正方形の告知グラフィック。「＼おかげさまでご好評です／」の帯、「マンジャロは全国的に需要の高いお薬です」の大見出し、「在庫・診察予約の空き状況は変動します。最新の状況はLINEでご確認ください」の説明、下部に緑のドット付きで「今月のご相談 受付中」のピル型バッジ。青系グラデーション背景の白抜き文字。※売切・受付終了の演出は入れない。</p>
+</div>
+
+<!-- F-03 y=975 -->
+<div class="frame" style="height:585px;">
+  <span class="f-id">F-03 料金プラン表<span class="f-size">390×585px</span></span>
+  <p class="f-prompt">「＋長期プランほどお得＋ 選べる料金プラン」の見出し付き料金表グラフィック。列=1ヶ月(単品)/3ヶ月定期(ピンクの「人気」タグ)/6ヶ月定期(ティールの「配送ラク」タグ)、行=2.5mg/5.0mg/7.5mg/10mg。セル値: 2.5mg 13,980円〜・12,980円/月(総額38,940円)・12,980円/月(総額77,880円)、5.0mg 27,980円〜・23,980円/月(総額71,940円)・23,980円/月(総額143,880円)、7.5mg 41,980円〜・34,980円/月(総額104,940円)・34,980円/月(総額209,880円)、10mg 53,980円〜・43,980円/月(総額131,940円)・43,980円/月(総額263,880円)。人気列はピンク背景。欄外に「※税込／いつでも解約可能・違約金なし」。白基調の清潔な表デザイン。</p>
+</div>
+
+<!-- F-04 y=1559 -->
+<div class="frame" style="height:551px;">
+  <span class="f-id">F-04 人気No.1スポットライト<span class="f-size">390×551px</span></span>
+  <p class="f-prompt">「＼迷ったらこれ／ 3ヶ月定期プラン」の見出しグラフィック。王冠アイコン、GLP-1自己注射ペンと2.5mg外箱の商品写真、「2.5mg 月額12,980円(税込)」の大型価格、「総額38,940円(税込・3ヶ月分)」、比較バッジ2枚「単品購入より毎月1,000円お得」「6ヶ月定期より始めやすい」、下部に利点3アイコン「3ヶ月分まとめて届く」「支払いは3ヶ月ごと1回」「変化を見ながら継続を判断」。水色×ピンクの華やかなセクション画像。</p>
+</div>
+
+<!-- 購入ウィジェット（DOM・実測組版）: 参照 y=2110-2910 -->
+<section class="widget">
+  <h1 class="w-title">【選べるプラン】GLP-1メディカルダイエット注射（オンライン診療）</h1>
+  <p class="w-strike">単品3ヶ月分 41,940円</p>
+  <p class="w-price">¥38,700<span style="font-size:14px;font-weight:700;">（3ヶ月定期・税込38,940円）</span></p>
+  <p class="w-fact">定期はいつでも解約可能・回数縛りなし</p>
+
+  <label for="pxDose">用量</label>
+  <select id="pxDose">
+    <option value="2.5mg" selected>2.5mg（はじめての方はこちら）</option>
+    <option value="5mg">5.0mg</option>
+    <option value="7.5mg">7.5mg</option>
+    <option value="10mg">10mg</option>
+  </select>
+
+  <label for="pxPlan">配送頻度</label>
+  <select id="pxPlan">
+    <option value="tanpin">1ヶ月（単品）</option>
+    <option value="teiki3" selected>3ヶ月ごと（定期）</option>
+    <option value="teiki6">6ヶ月ごと（定期）</option>
+  </select>
+
+  <p class="w-planlabel">プラン内容</p>
+  <div class="plan-card">
+    <span class="pc-price" id="pxTotal">¥38,940</span>
+    <p class="pc-name" id="pxName">3ヶ月定期プラン</p>
+    <p id="pxCycle">配送サイクル：3ヶ月ごとにまとめてお届け</p>
+    <div class="pc-rows">
+      <p>【月あたり料金／単品比お得額】</p>
+      <p>2.5mg：12,980円/月（毎月1,000円オフ）</p>
+      <p>5.0mg：23,980円/月（毎月4,000円オフ）</p>
+      <p>7.5mg：34,980円/月（毎月7,000円オフ）</p>
+      <p>10mg：43,980円/月（毎月10,000円オフ）</p>
+    </div>
+    <p class="pc-check">✓ 定期便はいつでも解約可能</p>
+    <p class="pc-check">✓ 回数縛りなし</p>
+  </div>
+</section>
+
+<p class="micro-red">続けやすい価格で、3ヶ月−6kgを目指す<sup style="font-size:9px;">※1</sup></p>
+<a class="cta" href="https://lin.ee/8B6y6Ta" target="_blank" rel="noopener">LINEで診察を予約する</a>
+<p class="cta-note">※医師の診察により<b>処方できない場合があります</b>。相談・診察予約はLINEから。</p>
+
+<!-- F-05 y=2910 -->
+<div class="frame" style="height:633px;margin-top:20px;">
+  <span class="f-id">F-05 処方までの流れ<span class="f-size">390×633px</span></span>
+  <p class="f-prompt">「処方までの流れ」3ステップの縦グラフィック。STEP01「LINEで友だち追加・予約」スマホでLINEを操作する手元写真、STEP02「オンライン診察（約10分）」タブレット越しに微笑む白衣の日本人女性医師、STEP03「ご自宅のポストへお届け」白い無地の配送ボックス。各ステップに番号丸バッジと説明文。水色基調の清潔なデザイン。</p>
+</div>
+
+<!-- F-06 y=3543 -->
+<div class="frame" style="height:520px;">
+  <span class="f-id">F-06 安心方針<span class="f-size">390×520px</span></span>
+  <p class="f-prompt">「無理におすすめしません」見出しの安心訴求グラフィック。3カード:「医師が処方可否を判断」（医師アイコン）、「医学的に不要なら処方しません」（チェック盾アイコン）、「無理な勧誘はありません」（吹き出し×アイコン）。欄外に「体質・既往歴・服薬状況などにより処方できない場合があります」。白×水色の誠実なトーン。※返金保証の文言は入れない。</p>
+</div>
+
+<!-- F-07 y=4063 -->
+<div class="frame" style="height:703px;">
+  <span class="f-id">F-07 人気の理由 POINT01<span class="f-size">390×703px</span></span>
+  <p class="f-prompt">「GLP-1注射はなぜ人気？」見出し＋POINT01「過度な我慢に頼らず食欲がおだやかに」。GIPとGLP-1の2つの光る球体が重なる概念図（ピンク×水色）、説明文「2つのホルモン受容体にダブルで作用。少量の食事で満足しやすくなり、間食やドカ食いの習慣を見直しやすくなります」。医療インフォグラフィック調。</p>
+</div>
+
+<!-- F-08 y=4766 -->
+<div class="frame" style="height:585px;">
+  <span class="f-id">F-08 POINT02・03<span class="f-size">390×585px</span></span>
+  <p class="f-prompt">POINT02「『週に1回』でOK、だから忙しくても続く」卓上カレンダーの日曜に丸印の写真＋「週1回でOK!」バッジ。POINT03「痛みを感じにくい自動注入器」注射ペンを腹部にあてる手元写真（針は見えない）＋「ボタンを押すだけ」バッジ。2ブロック縦積みのグラフィック。</p>
+</div>
+
+<!-- F-09〜F-11 体験談（実例取得後に差し替え） y=5352/5872/6392 -->
+<div class="frame" style="height:521px;">
+  <span class="f-id">F-09 体験談1（V-01）<span class="f-size">390×521px</span></span>
+  <p class="f-prompt">【実例取得後に作成】「お客様の声」見出し＋体験談カード1枚目。属性（年代・職業）、利用プラン（用量・期間）、本文、「生活の変化」3項目。※本人の同意を得た実際の体験談のみ使用。体重数値を載せる場合は「※効果には個人差があります」を必ず併記。架空の体験談は景品表示法・ステマ規制違反。</p>
+</div>
+<div class="frame" style="height:520px;">
+  <span class="f-id">F-10 体験談2（V-02）<span class="f-size">390×520px</span></span>
+  <p class="f-prompt">【実例取得後に作成】体験談カード2枚目。構成はF-09と同じ。</p>
+</div>
+<div class="frame" style="height:520px;">
+  <span class="f-id">F-11 体験談3（V-03）<span class="f-size">390×520px</span></span>
+  <p class="f-prompt">【実例取得後に作成】体験談カード3枚目。構成はF-09と同じ。</p>
+</div>
+
+<!-- 商品ギャラリー: メイン390×390（y=6927）＋サムネ67×67（y=7331） -->
+<div class="gallery-main">
+  <div class="frame" style="height:390px;" id="galleryMain">
+    <span class="f-id">G-01 ギャラリー本図<span class="f-size">390×390px</span></span>
+    <p class="f-prompt">GLP-1自己注射ペン（グレー×紫）と2.5mg外箱の正方形商品写真。白背景・柔らかい影・清潔な物撮り。サムネG-02〜07は本図の別カット（箱のみ／ペンのみ／プラン表／流れ図／バッジ集／同梱物）。</p>
+  </div>
+  <div class="thumbs">
+    <span class="thumb">G-01</span><span class="thumb">G-02</span><span class="thumb">G-03</span><span class="thumb">G-04</span><span class="thumb">G-05</span><span class="thumb">G-06</span><span class="thumb">G-07</span>
+  </div>
+</div>
+
+<!-- FAQ（DOM・実測組版: 行幅342 / 本文17px） -->
+<section class="faq-sec">
+  <h2>よくある質問</h2>
+  <div class="faq">
+    <details><summary>Q. 誰でも処方してもらえますか？</summary><div class="a">A. 医師の診察により、適応や体調・既往歴などを確認したうえで判断されます。医学的に必要がないと判断した場合は処方いたしません。</div></details>
+    <details><summary>Q. オンラインだけで完結しますか？</summary><div class="a">A. はい。予約から診察・処方・配送まですべてオンラインで完結します。症状によっては対面での受診をおすすめする場合があります。</div></details>
+    <details><summary>Q. 最安でいくらですか？</summary><div class="a">A. マンジャロ2.5mgの定期プランで1ヶ月あたり12,980円（税込）です。単品は13,980円〜。別途送料がかかる場合があります。</div></details>
+    <details><summary>Q. 定期縛りはありますか？</summary><div class="a">A. ありません。次回配送日の前までにご連絡いただければ、いつでも解約・休止できます。違約金もありません。</div></details>
+    <details><summary>Q. いつ届きますか？</summary><div class="a">A. 診察・決済の時間帯やお届けエリアにより異なりますが、最短翌日にポストへお届けします。中身のわからない梱包です。</div></details>
+    <details><summary>Q. 副作用はありますか？</summary><div class="a">A. 吐き気・便秘・下痢・食欲不振・注射部位の反応などが報告されています。まれに急性膵炎・低血糖の報告があります。気になる症状が出た場合は使用を中止し、医師にご相談ください。</div></details>
+  </div>
+</section>
+
+<!-- F-12 締めバナー y=8028（356×356センター） -->
+<div class="frame" style="width:356px;height:356px;margin:17px auto;">
+  <span class="f-id">F-12 締めバナー<span class="f-size">356×356px</span></span>
+  <p class="f-prompt">正方形の締めバナー。クリニックロゴ、「まずはLINEで無料相談から」のコピー、LINEアイコン、「友だち追加10秒・相談無料」の注記。水色グラデーション背景の上品なデザイン。</p>
+</div>
+
+<footer class="footer">
+  <ul>
+    <li>※1 参考文献：Jastreboff AM, et al. "Tirzepatide Once Weekly for the Treatment of Obesity." N Engl J Med 2022;387 における同成分製剤の臨床試験結果をもとにした目安です。効果には個人差があり、結果を保証するものではありません。</li>
+    <li>※ 本ページに記載の治療はすべて自由診療（保険適用外）です。価格はすべて税込です。</li>
+    <li>※ お薬は医師の診察のうえ処方されます。診察の結果、処方できない場合があります。</li>
+    <li>※ マンジャロ（チルゼパチド）の肥満治療目的での使用は国内未承認の用法を含む自由診療です。適応外使用のため医薬品副作用被害救済制度の対象外となります。</li>
+  </ul>
+</footer>
+
+</main>
+<script>
+// ウィジェット計算（価格の正本は index.html の groups と同値）
+const PRICES = {
+  '2.5mg': {tanpin:13980, teiki:12980},
+  '5mg':   {tanpin:27980, teiki:23980},
+  '7.5mg': {tanpin:41980, teiki:34980},
+  '10mg':  {tanpin:53980, teiki:43980},
+};
+const dSel = document.getElementById('pxDose');
+const pSel = document.getElementById('pxPlan');
+function upd(){
+  const p = PRICES[dSel.value];
+  const plan = pSel.value;
+  const months = plan === 'teiki6' ? 6 : plan === 'teiki3' ? 3 : 1;
+  const monthly = plan === 'tanpin' ? p.tanpin : p.teiki;
+  document.getElementById('pxTotal').textContent = '¥' + (monthly * months).toLocaleString();
+  document.getElementById('pxName').textContent =
+    plan === 'teiki6' ? '6ヶ月定期プラン' : plan === 'teiki3' ? '3ヶ月定期プラン' : '1ヶ月（単品）';
+  document.getElementById('pxCycle').textContent =
+    plan === 'tanpin' ? 'お届け：1ヶ月分（定期契約なし）' :
+    (plan === 'teiki3' ? '配送サイクル：3ヶ月ごとにまとめてお届け' : '配送サイクル：6ヶ月ごとにまとめてお届け');
+}
+dSel.addEventListener('change', upd);
+pSel.addEventListener('change', upd);
+upd();
+</script>
+</body>
+</html>
